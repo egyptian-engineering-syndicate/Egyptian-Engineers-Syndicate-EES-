@@ -1,0 +1,101 @@
+.barWrapper {
+
+  width: 100%;
+  background-color: var(--color-brand-green);
+  background-image: url('/images/navbar-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0.75rem 0;
+  color: #ffffff;
+  font-family: "Neo Sans Arabic", var(--font-cairo), "Noto Sans Arabic", sans-serif;
+  direction: rtl;
+
+
+}
+
+.container {
+  max-width: 1240px;
+  height: 46px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.9rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbList {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 2px;
+  list-style: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.current {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.homeIcon {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.separatorIcon {
+  width: 12px;
+  height: 12px;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: scaleX(-1);
+  /* Flips chevron in RTL if necessary, or matches direction */
+}
+
+/* Theme contrast adjustment */
+:root[data-theme="high-contrast"] .barWrapper {
+  background-color: #000000 !important;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+:root[data-theme="high-contrast"] .link {
+  color: #ffffff !important;
+}
+
+:root[data-theme="high-contrast"] .current {
+  color: var(--color-hover-green) !important;
+  text-decoration: underline;
+}

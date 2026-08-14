@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Define Neo Sans Arabic locally if available, fallback to Cairo/Noto Sans */
+@font-face {
+  font-family: "Neo Sans Arabic";
+  src: local("Neo Sans Arabic"), local("NeoSansArabic");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Custom Navbar Theme Variables */
+  --color-brand-green: #008C54;
+  --color-hover-green: #038653;
+  --color-title-green: #136620;
+  --color-nav-text: #505050;
+  
+  /* Accessibility properties */
+  --font-scale: 1.0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Use the specified font stack for Arabic support */
+  font-family: "Neo Sans Arabic", var(--font-cairo), "Noto Sans Arabic", Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* High Contrast theme overrides */
+:root[data-theme="high-contrast"] {
+  --background: #000000 !important;
+  --foreground: #ffffff !important;
+  --color-brand-green: #ffffff !important;
+  --color-hover-green: #00ff66 !important;
+  --color-title-green: #00ff66 !important;
+  --color-nav-text: #ffffff !important;
+}
+
