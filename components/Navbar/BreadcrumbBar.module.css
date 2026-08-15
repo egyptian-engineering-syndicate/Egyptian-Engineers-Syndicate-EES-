@@ -1,6 +1,5 @@
 .barWrapper {
-
-  width: 100%;
+   width: 100%;
   background-color: var(--color-brand-green);
   background-image: url('/images/navbar-bg.png');
   background-size: cover;
@@ -11,15 +10,14 @@
   font-family: "Neo Sans Arabic", var(--font-cairo), "Noto Sans Arabic", sans-serif;
   direction: rtl;
 
-
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1636px;
   height: 46px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 1.9rem;
+  padding: 0 1.5rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;

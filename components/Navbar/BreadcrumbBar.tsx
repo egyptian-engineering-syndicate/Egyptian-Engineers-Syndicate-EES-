@@ -18,6 +18,7 @@ const pathLabels: Record<string, string> = {
   "engineering": "الإدارة الهندسية",
   "committees": "اللجان",
   "news": "آخر الأخبار",
+  "latest-news": "آخر الأخبار",
   "events": "الفعاليات",
   "contact": "تواصل معنا",
   "profile": "الملف الشخصي",

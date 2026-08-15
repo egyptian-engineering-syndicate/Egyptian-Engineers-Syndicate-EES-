@@ -1,0 +1,269 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 378px;
+  height: 296px;
+  min-height: 296px;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #EAEAEA;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-sizing: border-box;
+}
+
+.cardLink {
+  text-decoration: none;
+  display: flex;
+  width: 100%;
+  max-width: 378px;
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  background-color: #F0F0F0;
+  overflow: hidden;
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.04);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px 18px 16px 18px;
+  gap: 6px;
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.publishDate {
+  font-size: 11.5px;
+  color: #757575;
+  font-weight: 400;
+}
+
+.title {
+  font-family: "Neo Sans Arabic", var(--font-cairo), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.09;
+  letter-spacing: 0.04em;
+  color: #181818;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+  text-align: right;
+}
+
+.excerpt {
+  font-family: "Neo Sans Arabic", var(--font-cairo), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #3E3E3E;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+  text-align: right;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #EAEAEA;
+  margin: auto 0 4px 0;
+  width: 100%;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2px;
+}
+
+.readMoreBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: "Neo Sans Arabic", var(--font-cairo), Arial, sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #505050;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.card:hover .readMoreBtn {
+  color: #008C54;
+}
+
+@media (max-width: 1200px) {
+  .card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 296px;
+  }
+
+  .cardLink {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 1.12;
+  }
+
+  .excerpt {
+    font-size: 15px;
+  }
+
+  .imageWrapper {
+    height: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .cardLink {
+    max-width: 100%;
+  }
+
+  .imageWrapper {
+    height: 132px;
+  }
+
+  .cardBody {
+    padding: 10px 12px 12px;
+    gap: 4px;
+  }
+
+  .headerMeta {
+    gap: 6px;
+  }
+
+  .publishDate {
+    font-size: 11px;
+  }
+
+  .title {
+    font-size: 17px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    -webkit-line-clamp: 2;
+  }
+
+  .excerpt {
+    font-size: 13px;
+  }
+
+  .divider {
+    margin: 4px 0 2px;
+  }
+
+  .readMoreBtn {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cardBody {
+    
+    padding: 12px 14px 14px;
+    gap: 4px;
+  }
+
+  .imageWrapper {
+    height: 150px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 1.18;
+    letter-spacing: 0.03em;
+  }
+
+  .excerpt {
+    font-size: 14px;
+  }
+
+  .readMoreBtn {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 514px) {
+  .cardLink {
+    width: 100%;
+  }
+
+  .imageWrapper {
+    height: 142px;
+  }
+
+  .cardBody {
+    padding: 11px 12px 13px;
+    gap: 3px;
+  }
+
+  .publishDate {
+    font-size: 10px;
+  }
+
+  .title {
+    font-size: 17px;
+    line-height: 1.16;
+  }
+
+  .excerpt {
+    font-size: 13px;
+  }
+
+  .divider {
+    margin: 3px 0 2px;
+  }
+
+  .readMoreBtn {
+    font-size: 12px;
+  }
+}

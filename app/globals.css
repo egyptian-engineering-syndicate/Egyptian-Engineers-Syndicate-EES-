@@ -10,7 +10,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #F8F8F8;
   --foreground: #171717;
 
   /* Custom Navbar Theme Variables */
@@ -18,7 +18,7 @@
   --color-hover-green: #038653;
   --color-title-green: #136620;
   --color-nav-text: #505050;
-  
+
   /* Accessibility properties */
   --font-scale: 1.0;
 }
@@ -54,4 +54,3 @@ body {
   --color-title-green: #00ff66 !important;
   --color-nav-text: #ffffff !important;
 }
-

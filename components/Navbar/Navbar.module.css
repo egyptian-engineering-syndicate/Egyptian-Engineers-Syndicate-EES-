@@ -10,7 +10,7 @@
 
 /* Container class for centering elements with padding */
 .container {
-  max-width: 1240px;
+  max-width: 1636px;
   width: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -19,8 +19,8 @@
 
 /* Top bar styling */
 .topBar {
-  border-bottom: 1px solid #eaeaea;
-  background-color: #ffffff;
+  border-bottom: 1px solid rgba(234, 234, 234, 0.6);
+  background-color: transparent;
   padding: 0.5rem 0;
 }
 
@@ -54,7 +54,7 @@
 /* Main header section */
 .mainHeader {
   padding: 1.25rem 0;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .mainHeaderContainer {

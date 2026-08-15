@@ -1,0 +1,15 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #F8F8F8;
+  color: #181818;
+  direction: rtl;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  background-color: #F8F8F8;
+}
+
