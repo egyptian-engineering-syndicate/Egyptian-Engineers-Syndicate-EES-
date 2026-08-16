@@ -1,0 +1,5 @@
+# Accidental Next.js output if a command is run from the repo root
+.next/
+next-env.d.ts
+node_modules/
+.DS_Store
