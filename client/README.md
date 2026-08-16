@@ -1,21 +1,12 @@
-# Next.js template
+# EES client
 
-This is a Next.js template with shadcn/ui.
+Next.js 16 App Router frontend for the Egyptian Engineers Syndicate.
 
-## Adding components
-
-To add components to your app, run the following command:
+- Architecture and folder rules: [ARCHITECTURE.md](./ARCHITECTURE.md)
+- Shared UI primitives: `components/ui` (shadcn)
+- Domain UI and forms: `features/`
 
 ```bash
-npx shadcn@latest add button
-```
-
-This will place the ui components in the `components` directory.
-
-## Using components
-
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
+npm install
+npm run dev
 ```
