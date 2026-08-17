@@ -1,0 +1,123 @@
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 378px;
+  height: 457px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  background-color: #1a1a1a;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.25), 0 10px 12px -5px rgba(0, 0, 0, 0.15);
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
+  direction: rtl;
+}
+
+.name {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: 0;
+  text-align: right;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  word-break: break-word;
+}
+
+.position {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  letter-spacing: 0;
+  text-align: right;
+  color: #CFCDCD;
+  margin-top: 6px;
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .card {
+    height: 410px;
+  }
+  .name {
+    font-size: 24px;
+  }
+  .position {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    max-width: 320px;
+    height: 380px;
+    border-radius: 12px;
+  }
+  .content {
+    padding: 18px;
+  }
+  .name {
+    font-size: 22px;
+  }
+  .position {
+    font-size: 15px;
+    margin-top: 4px;
+  }
+}

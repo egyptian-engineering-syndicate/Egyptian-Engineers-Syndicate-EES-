@@ -1,0 +1,217 @@
+.formCard {
+  width: 100%;
+  max-width: 937px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 32px 36px;
+  box-shadow: 0px 20px 26px 0px rgba(0, 0, 0, 0.06);
+  direction: rtl;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #3E3E3E;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.label {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  color: #4E4E4E;
+  margin: 0;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 63px;
+  background-color: #EFEFEF;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 12px 20px 12px 48px; /* Extra left padding for left-aligned icon in RTL */
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-size: 15px;
+  color: #1A1A1A;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  direction: rtl;
+  text-align: right;
+}
+
+.input:focus {
+  background-color: #FFFFFF;
+  border-color: #038653;
+  box-shadow: 0 0 0 3px rgba(3, 134, 83, 0.1);
+}
+
+.input::placeholder {
+  color: #9CA3AF;
+  font-family: "Neo Sans Arabic", sans-serif;
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  height: 120px;
+  background-color: #EFEFEF;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 16px 20px 16px 48px;
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-size: 15px;
+  color: #1A1A1A;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  resize: vertical;
+  direction: rtl;
+  text-align: right;
+}
+
+.textarea:focus {
+  background-color: #FFFFFF;
+  border-color: #038653;
+  box-shadow: 0 0 0 3px rgba(3, 134, 83, 0.1);
+}
+
+.textarea::placeholder {
+  color: #9CA3AF;
+  font-family: "Neo Sans Arabic", sans-serif;
+}
+
+/* Icon inside input (on the left side of input in RTL) */
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  width: 22px;
+  height: 22px;
+  color: #038653;
+  pointer-events: none;
+}
+
+.selectChevron {
+  position: absolute;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  color: #4B5563;
+  pointer-events: none;
+}
+
+/* Form Footer / Submit Button area */
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-start; /* In RTL, flex-start is right side or flex-end is left side */
+  margin-top: 10px;
+}
+
+.submitBtn {
+  width: 174px;
+  height: 60px;
+  background-color: #038653;
+  color: #FFFFFF;
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: #026d43;
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  padding: 12px 16px;
+  background-color: #DEF7EC;
+  color: #03543F;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .formCard {
+    padding: 20px 18px;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .subtitle {
+    font-size: 14px;
+  }
+  .input {
+    height: 52px;
+    font-size: 14px;
+  }
+  .submitBtn {
+    width: 100%;
+    height: 52px;
+    font-size: 16px;
+  }
+}

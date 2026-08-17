@@ -1,0 +1,126 @@
+.outerSection {
+  position: relative;
+  width: 100%;
+  min-height: 760px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  direction: rtl;
+}
+
+/* الصورة الخضراء (Rectangle 29939.png) في الأسفل */
+.rectangleWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 230px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rectangleImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* حاوية المحتوى */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1636px;
+
+  margin: 0 auto;
+  padding: 60px 40px 80px 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 42px;
+}
+
+/* عمود معلومات التواصل */
+.infoColumn {
+  flex: 0 0 657px;
+  max-width: 657px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+}
+
+/* عمود الفورم */
+.formColumn {
+  flex: 1;
+  max-width: 937px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* State message container */
+.stateContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #6B7280;
+  width: 100%;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1440px) {
+  .container {
+    padding: 40px 32px 60px 32px;
+    gap: 32px;
+  }
+
+  .infoColumn {
+    flex: 0 0 520px;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .outerSection {
+    min-height: auto;
+  }
+
+  .rectangleWrapper {
+    height: 50%;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+  }
+
+  .container {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 24px 60px 24px;
+  }
+
+  .infoColumn,
+  .formColumn {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .infoColumn {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 30px 16px 40px 16px;
+    gap: 30px;
+  }
+
+  .rectangleWrapper {
+    height: 45%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+}

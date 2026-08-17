@@ -1,0 +1,157 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
+  direction: rtl;
+  width: 100%;
+  max-width: 657px;
+  gap: 24px;
+}
+
+.topIconBox {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: rgba(0, 185, 113, 0.08); /* #00B97114 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #038653;
+  flex-shrink: 0;
+}
+
+.iconSvg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+}
+
+.title {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 120%;
+  color: #1A1A1A;
+  margin: 0;
+  text-align: right;
+  word-break: break-word;
+}
+
+.description {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #3E3E3E;
+  margin: 0;
+  text-align: right;
+  max-width: 657px;
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  width: 100%;
+  max-width: 394px;
+  margin-top: 8px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cardIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background-color: rgba(0, 185, 113, 0.08); /* #00B97114 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #038653;
+  flex-shrink: 0;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
+  flex: 1;
+}
+
+.cardLabel {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 109%;
+  letter-spacing: 0.04em;
+  color: #4E4E4E;
+  margin: 0 0 6px 0;
+}
+
+.cardValue {
+  font-family: "Neo Sans Arabic", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 109%;
+  letter-spacing: 0.04em;
+  color: #000000;
+  margin: 0;
+  word-break: break-word;
+  direction: ltr; /* Keeps phone & email correctly formatted if needed, or rtl */
+  text-align: right;
+}
+
+.cardValueRtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Responsive queries */
+@media (max-width: 1024px) {
+  .wrapper {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .title {
+    font-size: 32px;
+    text-align: center;
+  }
+  .description {
+    text-align: center;
+  }
+  .cardsList {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 26px;
+  }
+  .description {
+    font-size: 14px;
+  }
+  .card {
+    padding: 14px 16px;
+  }
+}

@@ -1,0 +1,138 @@
+.section {
+  width: 100%;
+  padding: 4.5rem 1.5rem;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1636px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+  box-sizing: border-box;
+}
+
+/* Text Content (Left side in RTL) */
+.textContent {
+  flex: 1 1 50%;
+  max-width: 936px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: right;
+}
+
+.title {
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-size: clamp(2.25rem, 2.5vw, 3rem); /* 48px at 1920px */
+  font-weight: 700;
+  line-height: 1.2;
+  color: #181818;
+  margin: 0;
+}
+
+.description {
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-size: 1rem; /* 16px */
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: #3e3e3e;
+  white-space: pre-line;
+  margin: 0;
+}
+
+/* Image Side (Right side in RTL) */
+.imageSide {
+  flex: 0 0 50%;
+  position: relative;
+  width: 100%;
+  max-width: 794px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 794px;
+  height: 382px;
+}
+
+.image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: 6px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: block;
+}
+
+/* Decorative Green Rectangle behind Image */
+.greenBg {
+  position: absolute;
+  z-index: 1;
+  width: 70%;
+  max-width: 559px;
+  height: 266px;
+  bottom: -32px;
+  left: -24px;
+  background-color: #038653;
+  border-radius: 8px;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 3rem;
+  }
+
+  .textContent {
+    max-width: 100%;
+  }
+
+  .imageSide {
+    flex: 1 1 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .imageWrapper {
+    height: 340px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 2.5rem 1rem;
+  }
+
+  .title {
+    font-size: 1.85rem;
+  }
+
+  .imageWrapper {
+    height: 240px;
+  }
+
+  .greenBg {
+    height: 180px;
+    bottom: -16px;
+    left: -12px;
+  }
+}
