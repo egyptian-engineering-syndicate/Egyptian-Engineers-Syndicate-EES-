@@ -3,10 +3,14 @@ import { DirectusContactInfo } from "@/lib/directus/contact";
 import styles from "./ContactInfo.module.css";
 
 interface ContactInfoProps {
-  contact: DirectusContactInfo;
+  contact?: DirectusContactInfo;
 }
 
 export default function ContactInfo({ contact }: ContactInfoProps) {
+  if (!contact) {
+    return null;
+  }
+
   return (
     <div className={styles.wrapper}>
       {/* Top Translucent Green Speech Icon */}

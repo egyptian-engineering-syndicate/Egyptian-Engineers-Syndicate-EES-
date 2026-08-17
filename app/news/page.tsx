@@ -6,4 +6,6 @@ export const metadata: Metadata = {
   description: "تابع أحدث الأخبار والفعاليات والقرارات الصادرة عن نقابة المهندسين الفرعية بالقاهرة.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default LatestNewsPage;

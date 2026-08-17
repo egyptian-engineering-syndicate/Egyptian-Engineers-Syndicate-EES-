@@ -89,7 +89,7 @@ export async function getPublishedNews(): Promise<NewsResult> {
       const timeoutId = setTimeout(() => controller.abort(), 3000);
 
       const response = await fetch(endpoint, {
-        next: { revalidate: 60 },
+        cache: "no-store",
         signal: controller.signal,
         headers,
       });
@@ -116,7 +116,7 @@ export async function getPublishedNews(): Promise<NewsResult> {
     }
   }
 
-  return { ok: false, error: lastError || "تعذّر الاتصال بالخادم" };
+  return { ok: false, error: lastError || "تعذّر تحميل المحتوى حالياً" };
 }
 
 /**
@@ -133,7 +133,7 @@ export async function getNewsById(
     const response = await fetch(
       `${DIRECTUS_URL}/items/news/${id}`,
       {
-        next: { revalidate: 60 },
+        cache: "no-store",
         signal: controller.signal,
         headers: { Accept: "application/json" },
       }
@@ -176,7 +176,7 @@ export async function getRelatedNews(
       `&limit=${limit}`;
 
     const response = await fetch(url, {
-      next: { revalidate: 60 },
+      cache: "no-store",
       signal: controller.signal,
       headers: { Accept: "application/json" },
     });

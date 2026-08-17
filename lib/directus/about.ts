@@ -67,7 +67,7 @@ export async function getAboutData(): Promise<AboutResult> {
       const timeoutId = setTimeout(() => controller.abort(), 3000);
 
       const response = await fetch(endpoint, {
-        next: { revalidate: 60 },
+        cache: "no-store",
         signal: controller.signal,
         headers,
       });
@@ -119,6 +119,6 @@ export async function getAboutData(): Promise<AboutResult> {
 
   return {
     ok: false,
-    error: lastError || errorsLog.join("; ") || "تعذّر الاتصال بقاعدة البيانات",
+    error: lastError || errorsLog.join("; ") || "تعذّر تحميل المحتوى حالياً",
   };
 }

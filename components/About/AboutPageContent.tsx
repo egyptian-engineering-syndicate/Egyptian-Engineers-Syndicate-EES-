@@ -1,5 +1,6 @@
 import React from "react";
 import { AboutResult } from "@/lib/directus/about";
+import { DirectusContactInfo } from "@/lib/directus/contact";
 import { DirectusMemberItem } from "@/lib/directus/members";
 import AboutSection from "./AboutSection";
 import VisionGoalsSection from "./VisionGoalsSection";
@@ -10,36 +11,12 @@ import styles from "./AboutPageContent.module.css";
 interface AboutPageContentProps {
   aboutResult: AboutResult;
   initialMembers?: DirectusMemberItem[];
+  initialContact?: DirectusContactInfo;
 }
 
-export default function AboutPageContent({ aboutResult, initialMembers }: AboutPageContentProps) {
+export default function AboutPageContent({ aboutResult, initialMembers, initialContact }: AboutPageContentProps) {
   if (!aboutResult.ok) {
-    return (
-      <div className={styles.errorState}>
-        <span className={styles.errorIcon}>⚠️</span>
-        <h2 className={styles.errorTitle}>تعذّر تحميل البيانات</h2>
-        <p className={styles.errorText}>
-          تعذّر الاتصال بقاعدة البيانات. يرجى التحقق من تشغيل الخادم والمحاولة لاحقاً.
-        </p>
-        {aboutResult.error && (
-          <code
-            style={{
-              marginTop: "1rem",
-              padding: "0.5rem 0.75rem",
-              background: "#fee2e2",
-              color: "#991b1b",
-              borderRadius: "6px",
-              fontSize: "0.85rem",
-              direction: "ltr",
-              display: "inline-block",
-              wordBreak: "break-all",
-            }}
-          >
-            Details: {aboutResult.error}
-          </code>
-        )}
-      </div>
-    );
+    return null;
   }
 
   return (
@@ -54,7 +31,7 @@ export default function AboutPageContent({ aboutResult, initialMembers }: AboutP
       <MembersSection initialMembers={initialMembers} />
 
       {/* Section 5: تواصل معنا */}
-      <ContactSection />
+      <ContactSection initialContact={initialContact} />
     </div>
   );
 }

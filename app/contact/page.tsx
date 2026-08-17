@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "تواصل مع نقابة المهندسين الفرعية بالقاهرة عبر الهاتف، البريد الإلكتروني، أو من خلال النموذج الإلكتروني.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ContactPage() {
   const contactResult = await getContactInfo();
   const initialContact = contactResult.ok ? contactResult.data : undefined;

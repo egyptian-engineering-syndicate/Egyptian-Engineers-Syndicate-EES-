@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "تابع أحدث الأخبار والفعاليات والقرارات الصادرة عن نقابة المهندسين الفرعية بالقاهرة.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function LatestNewsPage() {
   // Fetch real data from Directus — no mock fallback
   const newsResult = await getPublishedNews();

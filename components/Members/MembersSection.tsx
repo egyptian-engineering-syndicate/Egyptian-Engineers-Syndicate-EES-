@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef, TouchEvent, MouseEvent } from "react";
-import { DirectusMemberItem, getMembersData } from "@/lib/directus/members";
+import React, { useState, useEffect, useRef, TouchEvent } from "react";
+import { DirectusMemberItem } from "@/lib/directus/members";
 import MemberCard from "./MemberCard";
 import styles from "./MembersSection.module.css";
 
@@ -10,9 +10,7 @@ interface MembersSectionProps {
 }
 
 export default function MembersSection({ initialMembers }: MembersSectionProps) {
-  const [members, setMembers] = useState<DirectusMemberItem[]>(initialMembers || []);
-  const [loading, setLoading] = useState<boolean>(!initialMembers || initialMembers.length === 0);
-  const [error, setError] = useState<string | null>(null);
+  const members = initialMembers || [];
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -20,34 +18,6 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
   const [visibleCount, setVisibleCount] = useState<number>(4);
 
   const carouselRef = useRef<HTMLDivElement>(null);
-
-  // Fetch from Directus if no initial members passed
-  useEffect(() => {
-    if (initialMembers && initialMembers.length > 0) {
-      setMembers(initialMembers);
-      setLoading(false);
-      return;
-    }
-
-    let isMounted = true;
-    async function fetchMembers() {
-      setLoading(true);
-      const res = await getMembersData();
-      if (!isMounted) return;
-
-      if (res.ok) {
-        setMembers(res.data);
-      } else {
-        setError(res.error);
-      }
-      setLoading(false);
-    }
-
-    fetchMembers();
-    return () => {
-      isMounted = false;
-    };
-  }, [initialMembers]);
 
   // Handle responsive visible card count
   useEffect(() => {
@@ -71,7 +41,6 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
 
   const maxIndex = Math.max(0, members.length - visibleCount);
 
-  // Next / Prev actions (RTL logic)
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1));
   };
@@ -80,7 +49,6 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
   };
 
-  // Touch Swipe Handlers for mobile & tablet
   const minSwipeDistance = 50;
 
   const onTouchStart = (e: TouchEvent) => {
@@ -98,7 +66,6 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
-    // In RTL, swiping left moves to next index, swiping right moves to prev index
     if (isLeftSwipe) {
       handleNext();
     } else if (isRightSwipe) {
@@ -106,41 +73,25 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
     }
   };
 
-  // Calculate slide offset percentage or pixels
-  // Card width + gap
   const getTransform = () => {
-    // In CSS module: gap is 28px on desktop, 20px on tablet
-    // Each item takes 100% / visibleCount minus gap proportion, or fixed step
     const stepPercent = 100 / visibleCount;
-    // Positive transform in RTL moves track leftwards revealing next cards
     return `translateX(${currentIndex * stepPercent}%)`;
   };
 
   return (
     <section className={styles.section} aria-label="أعضاء النقابة">
-      {/* Decorative Green Rectangles */}
       <div className={styles.greenShapeLeft} aria-hidden="true" />
       <div className={styles.greenShapeRight} aria-hidden="true" />
 
       <div className={styles.container}>
         <h2 className={styles.title}>أعضاء النقابة</h2>
 
-        {loading ? (
-          <div className={styles.stateContainer}>
-            <div className={styles.spinner} />
-            <p>جاري تحميل أعضاء النقابة...</p>
-          </div>
-        ) : error && members.length === 0 ? (
-          <div className={styles.stateContainer}>
-            <p className="text-red-500 font-medium">تعذّر تحميل قائمة أعضاء النقابة.</p>
-          </div>
-        ) : members.length === 0 ? (
+        {members.length === 0 ? (
           <div className={styles.stateContainer}>
             <p>لا يوجد أعضاء نقابة متاحة حالياً.</p>
           </div>
         ) : (
           <>
-            {/* Carousel Viewport */}
             <div
               className={styles.carouselViewport}
               ref={carouselRef}
@@ -171,11 +122,9 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
               </div>
             </div>
 
-            {/* Bottom Navigation Controls */}
             {members.length > visibleCount && (
               <div className={styles.controlsWrapper}>
                 <div className={styles.controlsBar}>
-                  {/* Previous Arrow (Right side arrow in RTL) */}
                   <button
                     onClick={handlePrev}
                     disabled={currentIndex === 0}
@@ -186,7 +135,6 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
                     ←
                   </button>
 
-                  {/* Pagination Dots */}
                   <div className={styles.dotsWrapper}>
                     {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
                       <button
@@ -201,7 +149,6 @@ export default function MembersSection({ initialMembers }: MembersSectionProps) 
                     ))}
                   </div>
 
-                  {/* Next Arrow (Left side arrow in RTL) */}
                   <button
                     onClick={handleNext}
                     disabled={currentIndex >= maxIndex}

@@ -53,65 +53,49 @@ export default function NewsGrid({ newsResult }: NewsGridProps) {
         />
       </div>
 
-      {/* Error State — Directus unreachable */}
-      {!newsResult.ok && (
-        <div className={styles.errorState}>
-          <span className={styles.errorIcon}>⚠️</span>
-          <h2 className={styles.errorTitle}>تعذّر تحميل الأخبار</h2>
-          <p className={styles.errorText}>تعذّر الاتصال بقاعدة البيانات. يرجى التحقق من تشغيل الخادم والمحاولة لاحقاً.</p>
-        </div>
-      )}
-
-      {/* News content — only shown when Directus is reachable */}
-      {newsResult.ok && (
+      {displayedNews.length > 0 ? (
         <>
-          {displayedNews.length > 0 ? (
-            <>
-              <div className={styles.grid}>
-                {displayedNews.map((newsItem, index) => (
-                  <NewsCard key={`${newsItem.id}-${index}`} news={newsItem} />
-                ))}
-              </div>
+          <div className={styles.grid}>
+            {displayedNews.map((newsItem, index) => (
+              <NewsCard key={`${newsItem.id}-${index}`} news={newsItem} />
+            ))}
+          </div>
 
-              {/* Load More Button */}
-              {hasMore && (
-                <div className={styles.loadMoreContainer}>
-                  <button
-                    type="button"
-                    className={styles.loadMoreButton}
-                    onClick={handleLoadMore}
-                  >
-                    شاهد المزيد
-                  </button>
-                </div>
-              )}
-            </>
-          ) : (
-            /* Empty State */
-            <div className={styles.emptyState}>
-              {searchQuery.trim() ? (
-                <>
-                  <h2 className={styles.emptyTitle}>لا توجد نتائج مطابقة</h2>
-                  <p className={styles.emptyText}>
-                    لم نجد أي أخبار تطابق &quot;{searchQuery}&quot;. جرب البحث بكلمات أخرى.
-                  </p>
-                  <button
-                    type="button"
-                    className={styles.resetSearchBtn}
-                    onClick={() => setSearchQuery("")}
-                  >
-                    عرض كافة الأخبار
-                  </button>
-                </>
-              ) : (
-                <>
-                  <h2 className={styles.emptyTitle}>لا توجد أخبار حالياً</h2>
-                  <p className={styles.emptyText}>لم يتم نشر أي أخبار بعد. تابعنا قريباً.</p>
-                </>
-              )}
+          {hasMore && (
+            <div className={styles.loadMoreContainer}>
+              <button
+                type="button"
+                className={styles.loadMoreButton}
+                onClick={handleLoadMore}
+              >
+                شاهد المزيد
+              </button>
             </div>
           )}
         </>
+      ) : (
+        <div className={styles.emptyState}>
+          {searchQuery.trim() ? (
+            <>
+              <h2 className={styles.emptyTitle}>لا توجد نتائج مطابقة</h2>
+              <p className={styles.emptyText}>
+                لم نجد أي أخبار تطابق &quot;{searchQuery}&quot;. جرب البحث بكلمات أخرى.
+              </p>
+              <button
+                type="button"
+                className={styles.resetSearchBtn}
+                onClick={() => setSearchQuery("")}
+              >
+                عرض كافة الأخبار
+              </button>
+            </>
+          ) : (
+            <>
+              <h2 className={styles.emptyTitle}>لا توجد أخبار حالياً</h2>
+              <p className={styles.emptyText}>لم يتم نشر أي أخبار بعد. تابعنا قريباً.</p>
+            </>
+          )}
+        </div>
       )}
     </section>
   );
