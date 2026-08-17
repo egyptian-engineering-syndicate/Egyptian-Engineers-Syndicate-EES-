@@ -21,6 +21,11 @@ const DIRECTUS_URL =
   process.env.DIRECTUS_URL ||
   "http://localhost:8055";
 
+const DIRECTUS_TOKEN =
+  process.env.DIRECTUS_STATIC_TOKEN ||
+  process.env.NEXT_PUBLIC_DIRECTUS_TOKEN ||
+  "";
+
 /**
  * Returns full URL for a Directus file/image asset.
  */
@@ -41,8 +46,6 @@ export function getDirectusImageUrl(
   return `${DIRECTUS_URL}/assets/${imageId}`;
 }
 
-
-
 /**
  * Fetch published news items from Directus collection `news`.
  * Returns a NewsResult discriminated union:
@@ -50,24 +53,45 @@ export function getDirectusImageUrl(
  *   { ok: false, error: string } — network/server error
  */
 export async function getPublishedNews(): Promise<NewsResult> {
-  const endpoints = [
-    `${DIRECTUS_URL}/items/news?filter[status][_eq]=published&sort=-published_at`,
-    `${DIRECTUS_URL}/items/News?filter[status][_eq]=published&sort=-published_at`,
-    `${DIRECTUS_URL}/items/news`,
-    `${DIRECTUS_URL}/items/News`,
+  const baseUrls = Array.from(
+    new Set([
+      DIRECTUS_URL,
+      DIRECTUS_URL.replace("localhost", "127.0.0.1"),
+      "http://127.0.0.1:8055",
+      "http://localhost:8055",
+    ])
+  );
+
+  const paths = [
+    "/items/news?filter[status][_eq]=published&sort=-published_at",
+    "/items/News?filter[status][_eq]=published&sort=-published_at",
+    "/items/news",
+    "/items/News",
   ];
 
+  const endpoints: string[] = [];
+  for (const baseUrl of baseUrls) {
+    for (const path of paths) {
+      endpoints.push(`${baseUrl.replace(/\/$/, "")}${path}`);
+    }
+  }
+
   let lastError = "";
+
+  const headers: Record<string, string> = { Accept: "application/json" };
+  if (DIRECTUS_TOKEN) {
+    headers["Authorization"] = `Bearer ${DIRECTUS_TOKEN}`;
+  }
 
   for (const endpoint of endpoints) {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
 
       const response = await fetch(endpoint, {
         next: { revalidate: 60 },
         signal: controller.signal,
-        headers: { Accept: "application/json" },
+        headers,
       });
 
       clearTimeout(timeoutId);
