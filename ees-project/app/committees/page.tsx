@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { readItems } from "@directus/sdk";
 import { directus, getAssetUrl } from "@/lib/directus";
-
+import { Button } from "@/components/ui/button";
 interface Committee {
   id: string | number;
   name: string;
@@ -44,17 +44,17 @@ export default async function CommitteesPage() {
     <main dir="rtl" className="min-h-screen bg-white">
 
       {/* ================= HERO ================= */}
-      <section className="border-b bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      {/* <section className="border-b bg-white"> */}
+        <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
 
-          <h1 className="text-4xl font-bold text-[#0F3D66] md:text-5xl">
+          <h1 className="text-4xl font-bold text-[#181818] md:text-5xl">
             اللجان
           </h1>
 
-          <div className="mt-4 h-1 w-16 rounded-full bg-emerald-600" />
+          {/* <div className="mt-4 h-1 w-16 rounded-full bg-emerald-600" /> */}
 
         </div>
-      </section>
+      {/* </section> */}
 
       {/* ================= COMMITTEES ================= */}
       <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
@@ -67,9 +67,7 @@ export default async function CommitteesPage() {
 
         ) : (
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-
-            {/* نكرر أول لجنة 6 مرات للتجربة */}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 ">
             {Array.from({ length: 9 }).map((_, index) => {
 
               const committee = committees[0];
@@ -87,12 +85,11 @@ export default async function CommitteesPage() {
                     flex
                     min-h-[130px]
                     overflow-hidden
-                    rounded-xl
-                    border
-                    border-gray-200
+                border
+                rounded-xl
+                    border-gray-100
                     bg-white
-                    p-3
-                    shadow-sm
+                    shadow-lg
                     transition-all
                     duration-300
                     hover:-translate-y-1
@@ -103,12 +100,9 @@ export default async function CommitteesPage() {
                   {/* ================= IMAGE ================= */}
                   <div className="
                     relative
-                    h-[105px]
-                    w-[130px]
-                    shrink-0
+                    h-[160px]
+                    w-[150px]
                     overflow-hidden
-                    rounded-lg
-                    bg-gray-100
                   ">
 
                     {imageUrl ? (
@@ -120,7 +114,6 @@ export default async function CommitteesPage() {
                         unoptimized
                         className="
                           object-contain
-                          p-2
                           transition-transform
                           duration-300
                           group-hover:scale-105
@@ -156,48 +149,50 @@ export default async function CommitteesPage() {
                   ">
 
                     <h2 className="
-                      text-base
                       font-bold
-                      text-[#0F3D66]
+                      text-2xl
+                      text-[#191919]
                     ">
                       {committee.name}
                     </h2>
+<section className="border-b bg-white pb-2">
 
                     {committee.description && (
 
                       <p className="
                         mt-2
-                        line-clamp-2
+                        line-clamp-3
                         text-xs
                         leading-6
-                        text-gray-500
+                        text-[#3E3E3E]
                       ">
                         {committee.description}
                       </p>
-
                     )}
+                    </section>
 
                     <div className="
                       mt-2
                       flex
+                      pb-2
                       items-center
                       gap-1
                       text-xs
                       font-semibold
-                      text-emerald-700
+                      text-[#515151]
                     ">
 
                       <span>
-                        عرض التفاصيل
+                       تعرف علي المزيد
                       </span>
 
-                      <span className="
+                      {/* <span className="
                         transition-transform
                         duration-300
                         group-hover:-translate-x-1
                       ">
                         ←
-                      </span>
+                      </span> */}
 
                     </div>
 
@@ -206,8 +201,16 @@ export default async function CommitteesPage() {
                 </Link>
               );
             })}
+<div className="flex relative md:right-5 md:top-30 lg:top-0 md:left-60 lg:right-90 justify-center">
+  <Button
+    className="mt-8 w-fit items-center justify-center gap-4 rounded-[8px] border border-gray-200 bg-white px-6 py-4 text-gray-700 hover:bg-white hover:text-gray-700"
+  >
+    شاهد المزيد
+  </Button>
+</div>
 
           </div>
+          
 
         )}
 

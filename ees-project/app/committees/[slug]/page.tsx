@@ -32,11 +32,6 @@ export default async function CommitteeDetailsPage({
   params,
 }: PageProps) {
   const { slug } = await params;
-
-  // =========================
-  // GET COMMITTEE
-  // =========================
-
   let committees: Committee[] = [];
 
   try {
@@ -69,11 +64,6 @@ export default async function CommitteeDetailsPage({
   if (!committee) {
     notFound();
   }
-
-  // =========================
-  // GET COMMITTEE MEMBERS
-  // =========================
-
   let members: CommitteeMember[] = [];
 
   try {
@@ -118,10 +108,6 @@ export default async function CommitteeDetailsPage({
       dir="rtl"
       className="min-h-screen bg-white"
     >
-      {/* =========================
-          BACK
-      ========================= */}
-
       <section className="mx-auto max-w-7xl px-6 pt-8 lg:px-8">
         <Link
           href="/committees"
@@ -130,42 +116,41 @@ export default async function CommitteeDetailsPage({
           ← العودة إلى اللجان
         </Link>
       </section>
+      <section className="mx-auto max-w-7xl px-4 py-10 lg:px-8 ">
 
-      {/* =========================
-          COMMITTEE DETAILS
-      ========================= */}
+        <div className=" grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
 
-      <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
+<section className="relative h-[310px] w-full  bg-white lg:h-[600px]">
+  <div
+    className="
+      absolute
+      left-1/2
+      top-1/2
+      z-9
+h-[105%]
+w-[90%]
+      -translate-x-1/2
+      -translate-y-1/2
+      rounded-md
+      bg-[#008C54]
+    "
+  />
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
-
-          {/* =========================
-              COMMITTEE IMAGE
-          ========================= */}
-
-          <div className="relative h-[300px] w-full overflow-hidden lg:h-[600px]">
-
-            {committee.image ? (
-              <Image
-                src={getAssetUrl(committee.image)}
-                alt={committee.name}
-                fill
-                unoptimized
-                className="object-contain p-8"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-gray-400">
-                لا توجد صورة
-              </div>
-            )}
-
-          </div>
-
-          {/* =========================
-              COMMITTEE INFO
-          ========================= */}
-
+  {committee.image ? (
+    <Image
+      src={getAssetUrl(committee.image)}
+      alt={committee.name}
+      fill
+      unoptimized
+      className="relative z-90 object-contain"
+      sizes="(max-width: 1024px) 100vw, 50vw"
+    />
+  ) : (
+    <div className="relative z-10 flex h-full items-center justify-center text-gray-400">
+      لا توجد صورة
+    </div>
+  )}
+</section>
           <div>
 
             {/* TITLE */}
@@ -173,35 +158,20 @@ export default async function CommitteeDetailsPage({
             <h1 className="text-3xl font-bold leading-relaxed text-[#0F3D66]">
               {committee.name}
             </h1>
-
-            <div className="mt-3 h-1 w-16 rounded-full bg-emerald-600" />
-
             {/* DESCRIPTION */}
 
             {committee.description && (
-              <p className="mt-5 text-sm leading-7 text-gray-600">
+              <p className="mt-5 text-sm leading-5 text-gray-600">
                 {committee.description}
               </p>
             )}
-
-            {/* =========================
-                COMMITTEE MEMBERS TITLE
-            ========================= */}
-
             {topMembers.length > 0 && (
               <div className="mt-7">
 
                 <h2 className="text-3xl font-bold leading-relaxed text-[#0F3D66]">
                   أعضاء اللجنة
                 </h2>
-
-                <div className="mt-3 h-1 w-16 rounded-full bg-emerald-600" />
-
-                {/* =========================
-                    FIRST TWO MEMBERS
-                ========================= */}
-
-                <div className="mt-5 grid grid-cols-2 gap-4">
+                <div className="mt-5 relative md:left-16 grid grid-cols-2 p-8 w-[100%]">
 
                   {topMembers.map((member) => {
                     const imageUrl = member.image
@@ -211,7 +181,7 @@ export default async function CommitteeDetailsPage({
                     return (
                       <div
                         key={member.id}
-                        className="group mx-auto w-full max-w-[190px] overflow-hidden rounded-xl bg-gray-100 shadow-sm"
+                        className="group mx-auto w-full max-w-[200px] overflow-hidden rounded-xl bg-gray-100 shadow-sm"
                       >
 
                         {/* IMAGE */}
@@ -234,27 +204,6 @@ export default async function CommitteeDetailsPage({
                           )}
 
                         </div>
-
-                        {/* MEMBER INFO */}
-{/* 
-                        {(member.name || member.position) && (
-                          <div className="p-2 text-center">
-
-                            {member.name && (
-                              <h3 className="text-xs font-bold text-[#0F3D66] sm:text-sm">
-                                {member.name}
-                              </h3>
-                            )}
-
-                            {member.position && (
-                              <p className="mt-1 text-[11px] text-gray-500 sm:text-xs">
-                                {member.position}
-                              </p>
-                            )}
-
-                          </div>
-                        )} */}
-
                       </div>
                     );
                   })}
@@ -267,16 +216,10 @@ export default async function CommitteeDetailsPage({
           </div>
 
         </div>
-
-        {/* =========================
-            BOTTOM MEMBERS
-            4 CARDS
-        ========================= */}
-
         {members.length > 0 && (
-          <div className="mt-10">
+          <div className="mt-4">
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="relative md:left-14 grid grid-cols-4 p-8 w-[100%]">
 
               {bottomMembers.map((member, index) => {
                 const imageUrl = member.image
@@ -286,12 +229,12 @@ export default async function CommitteeDetailsPage({
                 return (
                   <div
                     key={`${member.id}-${index}`}
-                    className="group mx-auto w-full max-w-[210px] overflow-hidden rounded-xl bg-gray-100 shadow-sm"
+                    className="group mx-auto w-full max-w-[190px] overflow-hidden rounded-xl bg-gray-100 shadow-sm"
                   >
 
                     {/* IMAGE */}
 
-                    <div className="relative aspect-[4/5]  w-full">
+                    <div className="relative aspect-[4/5] w-full">
 
                       {imageUrl ? (
                         <Image
@@ -309,27 +252,6 @@ export default async function CommitteeDetailsPage({
                       )}
 
                     </div>
-
-                    {/* MEMBER INFO */}
-
-                    {/* {(member.name || member.position) && (
-                      <div className="p-2 text-center">
-
-                        {member.name && (
-                          <h3 className="text-xs font-bold text-[#0F3D66] sm:text-sm">
-                            {member.name}
-                          </h3>
-                        )}
-
-                        {member.position && (
-                          <p className="mt-1 text-[11px] text-gray-500 sm:text-xs">
-                            {member.position}
-                          </p>
-                        )}
-
-                      </div>
-                    )} */}
-
                   </div>
                 );
               })}
