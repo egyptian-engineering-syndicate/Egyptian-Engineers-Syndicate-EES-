@@ -9,7 +9,13 @@ export async function GET(
   const directusUrl =
     process.env.NEXT_PUBLIC_DIRECTUS_URL || "http://localhost:8056";
 
-  const response = await fetch(`${directusUrl}/assets/${id}`);
+  let response: Response;
+
+  try {
+    response = await fetch(`${directusUrl}/assets/${id}`);
+  } catch {
+    return new NextResponse("Asset service is unavailable", { status: 503 });
+  }
 
   if (!response.ok) {
     return new NextResponse("Image not found", {

@@ -37,26 +37,32 @@ export default async function CommitteeDetailsPage({
   // GET COMMITTEE
   // =========================
 
-  const committees = (await directus.request(
-    readItems("committees", {
-      fields: [
-        "id",
-        "name",
-        "slug",
-        "description",
-        "image",
-      ],
-      filter: {
-        slug: {
-          _eq: slug,
+  let committees: Committee[] = [];
+
+  try {
+    committees = (await directus.request(
+      readItems("committees", {
+        fields: [
+          "id",
+          "name",
+          "slug",
+          "description",
+          "image",
+        ],
+        filter: {
+          slug: {
+            _eq: slug,
+          },
+          status: {
+            _eq: true,
+          },
         },
-        status: {
-          _eq: true,
-        },
-      },
-      limit: 1,
-    })
-  )) as Committee[];
+        limit: 1,
+      })
+    )) as Committee[];
+  } catch {
+    notFound();
+  }
 
   const committee = committees[0];
 
@@ -68,28 +74,34 @@ export default async function CommitteeDetailsPage({
   // GET COMMITTEE MEMBERS
   // =========================
 
-  const members = (await directus.request(
-    readItems("committee_members", {
-      fields: [
-        "id",
-        "committee",
-        "name",
-        "position",
-        "image",
-        "sort",
-        "status",
-      ],
-      filter: {
-        committee: {
-          _eq: committee.id,
+  let members: CommitteeMember[] = [];
+
+  try {
+    members = (await directus.request(
+      readItems("committee_members", {
+        fields: [
+          "id",
+          "committee",
+          "name",
+          "position",
+          "image",
+          "sort",
+          "status",
+        ],
+        filter: {
+          committee: {
+            _eq: committee.id,
+          },
+          status: {
+            _eq: true,
+          },
         },
-        status: {
-          _eq: true,
-        },
-      },
-      sort: ["sort"],
-    })
-  )) as CommitteeMember[];
+        sort: ["sort"],
+      })
+    )) as CommitteeMember[];
+  } catch {
+    // The committee details remain available even if member data is unavailable.
+  }
 
   // أول عضوين
   const topMembers = members.slice(0, 2);

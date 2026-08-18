@@ -14,25 +14,31 @@ interface Committee {
 }
 
 export default async function CommitteesPage() {
-  const committees = (await directus.request(
-    readItems("committees", {
-      fields: [
-        "id",
-        "name",
-        "slug",
-        "description",
-        "image",
-        "sort",
-        "status",
-      ],
-      filter: {
-        status: {
-          _eq: true,
+  let committees: Committee[] = [];
+
+  try {
+    committees = (await directus.request(
+      readItems("committees", {
+        fields: [
+          "id",
+          "name",
+          "slug",
+          "description",
+          "image",
+          "sort",
+          "status",
+        ],
+        filter: {
+          status: {
+            _eq: true,
+          },
         },
-      },
-      sort: ["sort"],
-    })
-  )) as Committee[];
+        sort: ["sort"],
+      })
+    )) as Committee[];
+  } catch {
+    // Keep the existing empty-state UI available when Directus is offline.
+  }
 
   return (
     <main dir="rtl" className="min-h-screen bg-white">
