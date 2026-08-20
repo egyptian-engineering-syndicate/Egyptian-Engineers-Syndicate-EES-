@@ -9,18 +9,24 @@ import { Button } from "@/components/ui/button"
 import type {
   NavigationItem,
   SiteShellContent,
+  SiteShellUser,
 } from "../types/site-shell.types"
 
 interface MobileNavigationProps {
   items: NavigationItem[]
   login: SiteShellContent["login"]
+  user?: SiteShellUser
 }
 
-export function MobileNavigation({ items, login }: MobileNavigationProps) {
+export function MobileNavigation({
+  items,
+  login,
+  user,
+}: MobileNavigationProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="lg:hidden">
+    <div className="2xl:hidden">
       <Button
         type="button"
         variant="outline"
@@ -48,13 +54,20 @@ export function MobileNavigation({ items, login }: MobileNavigationProps) {
                 </li>
               ))}
             </ul>
-            <Link
-              href={login.href}
-              onClick={() => setOpen(false)}
-              className="mt-3 flex h-12 items-center justify-center rounded-md bg-brand font-semibold text-white"
-            >
-              {login.label}
-            </Link>
+            {user ? (
+              <div className="mt-3 rounded-md bg-brand/5 px-4 py-3 text-sm">
+                <p className="text-neutral-500">{user.greeting}</p>
+                <p className="font-semibold text-brand">{user.name}</p>
+              </div>
+            ) : (
+              <Link
+                href={login.href}
+                onClick={() => setOpen(false)}
+                className="mt-3 flex h-12 items-center justify-center rounded-md bg-brand font-semibold text-white"
+              >
+                {login.label}
+              </Link>
+            )}
           </nav>
         </div>
       ) : null}

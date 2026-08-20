@@ -27,7 +27,7 @@ export function SiteLogo({
           className={
             inverse
               ? "text-lg font-bold text-brand"
-              : "text-lg font-extrabold text-brand lg:text-xl"
+              : "hidden text-lg font-extrabold text-brand sm:inline lg:text-xl"
           }
         >
           {name}

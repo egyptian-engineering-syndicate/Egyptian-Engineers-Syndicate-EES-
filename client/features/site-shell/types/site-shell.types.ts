@@ -4,6 +4,11 @@ export interface NavigationItem {
   hasMenu?: boolean
 }
 
+export interface SiteShellUser {
+  greeting: string
+  name: string
+}
+
 export interface SiteShellContent {
   brand: {
     name: string
