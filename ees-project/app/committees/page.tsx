@@ -186,14 +186,6 @@ export default async function CommitteesPage() {
                        تعرف علي المزيد
                       </span>
 
-                      {/* <span className="
-                        transition-transform
-                        duration-300
-                        group-hover:-translate-x-1
-                      ">
-                        ←
-                      </span> */}
-
                     </div>
 
                   </div>
@@ -201,12 +193,14 @@ export default async function CommitteesPage() {
                 </Link>
               );
             })}
-<div className="flex relative md:right-5 md:top-30 lg:top-0 md:left-60 lg:right-90 justify-center">
-  <Button
-    className="mt-8 w-fit items-center justify-center gap-4 rounded-[8px] border border-gray-200 bg-white px-6 py-4 text-gray-700 hover:bg-white hover:text-gray-700"
-  >
-    شاهد المزيد
-  </Button>
+           <div className="flex justify-center">
+  <Link href="/clubs">
+    <Button
+      className="mt-8 w-fit items-center justify-center gap-4 rounded-[8px] border border-gray-200 bg-white px-6 py-4 text-gray-700 hover:bg-white hover:text-gray-700"
+    >
+      شاهد المزيد
+    </Button>
+  </Link>
 </div>
 
           </div>
