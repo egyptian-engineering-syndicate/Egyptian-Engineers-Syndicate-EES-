@@ -102,8 +102,7 @@ export const homePageContent: HomePageContent = {
     readMore: "تعرف على المزيد",
     featured: {
       title: "تدعو النقابة العامة للمهندسين شركات المقاولات",
-      excerpt:
-        "أعلنت نقابة المهندسين عن مبادرة جديدة لدعم شركات المقاولات والمهندسين، ضمن خطتها لتطوير الخدمات المهنية وتعزيز التواصل مع الأعضاء.",
+      excerpt: departmentDescription,
       imageAlt: "مشروع هندسي حديث",
       imagePosition: "center 42%",
       date: "24 من أغسطس 2026",

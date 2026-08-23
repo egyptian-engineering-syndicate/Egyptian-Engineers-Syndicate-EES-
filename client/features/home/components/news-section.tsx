@@ -32,8 +32,8 @@ export function NewsSection({ content }: NewsSectionProps) {
         </div>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[1.12fr_.88fr] lg:items-start">
-          <article className="relative overflow-hidden rounded-md bg-white shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-            <div className="relative aspect-[1.42/1] min-h-[420px] sm:min-h-[540px]">
+          <article className="relative">
+            <div className="relative aspect-[1.42/1] min-h-[420px] overflow-hidden rounded-xl sm:min-h-[540px]">
               <Image
                 src="/images/login-construction.jpg"
                 alt={content.featured.imageAlt}
@@ -44,7 +44,7 @@ export function NewsSection({ content }: NewsSectionProps) {
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(0,0,0,.22)_100%)]" />
             </div>
-            <div className="relative mx-4 -mt-16 rounded-md border border-brand bg-white px-6 py-6 shadow-md sm:mx-6 sm:px-8">
+            <div className="relative z-10 mx-4 -mt-14 rounded-xl border border-brand bg-white px-5 py-6 shadow-[0_16px_34px_rgba(0,0,0,.08)] sm:mx-6 sm:-mt-24 sm:px-8">
               <h3 className="text-xl leading-8 font-extrabold text-neutral-950 sm:text-2xl lg:text-[1.7rem]">
                 {content.featured.title}
               </h3>
