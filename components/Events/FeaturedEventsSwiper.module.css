@@ -1,0 +1,320 @@
+.sectionWrapper {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto 4rem auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Main Swiper Card Container - Total Height 528px on Desktop */
+.swiperCard {
+  width: 100%;
+  height: 528px;
+  min-height: 528px;
+  background: linear-gradient(270deg, #D6ECE0 0%, #EBF5F0 35%, #F7FBF9 70%, #F9FBFB 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row; /* In RTL: 1st child is RIGHT, 2nd child is LEFT */
+  align-items: stretch;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(3, 134, 83, 0.15);
+  box-sizing: border-box;
+}
+
+/* Top Green Rectangle/Stripe: Height 27px, Width 440px */
+.topGreenStripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 440px;
+  height: 27px;
+  background-color: #038653;
+  z-index: 5;
+  border-top-left-radius: 12px;
+}
+
+/* Content Container - Placed FIRST in JSX so it renders on the RIGHT in RTL */
+.contentContainer {
+  flex: 1;
+  padding: 2.5rem 3.5rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: right;
+  box-sizing: border-box;
+  z-index: 2;
+  height: 100%;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1.1rem;
+  background-color: rgba(3, 134, 83, 0.12);
+  border: 1px solid rgba(3, 134, 83, 0.25);
+  border-radius: 50px;
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #038653;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.25;
+  color: #181818;
+  margin: 0 0 0.85rem 0;
+  text-align: right;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #555555;
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-size: 15px;
+  margin-bottom: 1.1rem;
+}
+
+.calendarIcon {
+  width: 20px;
+  height: 20px;
+  stroke: #038653;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.description {
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 219%;
+  color: #444444;
+  text-align: right;
+  margin: 0 0 2rem 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Footer Controls Row */
+.footerControls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+/* Button "شاهد التفاصيل" */
+.detailsBtn {
+  width: 174px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #038653;
+  color: #ffffff;
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(3, 134, 83, 0.25);
+  transition: background-color 300ms ease-out, opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.detailsBtn:hover {
+  background-color: #026840;
+  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+/* Swiper Controls on the Left (RTL end) */
+.controlsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.arrowBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.arrowBtn:hover {
+  border-color: #038653;
+  color: #038653;
+  background: #f0fdf4;
+}
+
+.dotsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.25rem;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.activeDot {
+  background-color: #038653;
+  width: 11px;
+  height: 11px;
+}
+
+/* Image Container - Placed SECOND in JSX so it renders on the LEFT in RTL
+   Specifications: Width 777px (scaling proportionally on smaller screens), Height 501px, Top 27px, border-top-right-radius 8px */
+.imageContainer {
+  position: relative;
+  width: 777px;
+  max-width: 45%;
+  height: 501px;
+  margin-top: 27px; /* Top offset 27px under green stripe */
+  border-top-right-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+.featuredImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.imageContainer:hover .featuredImage {
+  transform: scale(1.02);
+}
+
+.slideFade {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+    transform: scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 1400px) {
+  .title {
+    font-size: 32px;
+  }
+  .imageContainer {
+    max-width: 42%;
+    height: 480px;
+    margin-top: 27px;
+  }
+  .topGreenStripe {
+    width: 380px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .swiperCard {
+    height: auto;
+    min-height: 460px;
+  }
+  .imageContainer {
+    max-width: 40%;
+    height: 420px;
+  }
+}
+
+@media (max-width: 900px) {
+  .swiperCard {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+  }
+
+  .imageContainer {
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    margin-top: 0;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .contentContainer {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .description {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .detailsBtn {
+    width: 140px;
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .topGreenStripe {
+    width: 220px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerControls {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .detailsBtn {
+    width: 100%;
+  }
+
+  .controlsWrapper {
+    justify-content: center;
+  }
+}
