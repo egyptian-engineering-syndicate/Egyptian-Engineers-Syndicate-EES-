@@ -60,9 +60,22 @@ features/
 |   |-- schemas/                    # Shared fields + page form schemas
 |   |-- types/                      # Auth content contracts
 |   `-- index.ts
+|-- home/
+|   |-- components/
+|   |-- data/
+|   |-- types/
+|   `-- index.ts
+|-- membership/
+|   |-- components/                 # Renewal + payment page views and cards
+|   |-- data/                       # Plans, member/demo-user, page content adapters
+|   |-- schemas/                    # Payment form schema
+|   |-- types/                      # Membership content contracts
+|   `-- index.ts
 `-- site-shell/
     |-- components/
     |-- data/
     |-- types/
     `-- index.ts
 ```
+
+`membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation.

@@ -20,7 +20,8 @@ Two independent parts, not a monorepo tool (no turborepo/nx). `client/` has its 
 - React Hook Form + Zod live inside the feature that owns the form.
 - Directus credentials and authenticated clients are server-only.
 - Package manager: **npm only** (`npm install`, `npm run dev/lint/typecheck/build`). Don't add a second lockfile.
-- Implemented so far: `features/auth` (login/register), `features/site-shell` (header/footer/nav/logo). Scaffolded-but-empty: `committees`, `events`, `home`, `membership`, `news`, `services` (folders exist, no files yet).
+- Implemented so far: `features/auth` (login/register), `features/site-shell` (header/footer/nav/logo), `features/home`, `features/membership` (subscription renewal + payment). Scaffolded-but-empty: `committees`, `events`, `news`, `services` (folders exist, no files yet).
+- `features/membership` routes (`/membership/renewal`, `/membership/renewal/payment`) live under their own `app/(member)/` route group, not `app/(website)/`, so its layout can pass a mock signed-in `SiteShellUser` (`membershipDemoUser`) to `SiteShell` — the logged-in header the designs show. `app/(website)/` stays guest-only (login/register unaffected). Swap this for real session wiring once auth exists; both groups still resolve to the same URLs since route groups don't affect paths.
 - `client/lib/directus/` exists as an empty placeholder — this is where the Directus SDK client + env wiring will go.
 - Stack: Next 16, React 19, Tailwind 4, shadcn/radix-ui, react-hook-form + zod, TanStack Query, next-themes.
 - `client/AGENTS.md` warns this Next.js version has breaking changes vs. training data — check `node_modules/next/dist/docs/` before relying on memorized Next.js APIs.
