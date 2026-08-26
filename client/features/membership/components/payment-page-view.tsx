@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { PageBreadcrumb } from "@/features/site-shell"
 
 import type {
   PaymentPageContent,
   SubscriptionPlan,
 } from "../types/membership-content.types"
-import { MembershipBreadcrumb } from "./membership-breadcrumb"
 import { PaymentForm } from "./payment-form"
 import { PaymentSummaryCard } from "./payment-summary-card"
 
@@ -16,7 +16,7 @@ interface PaymentPageViewProps {
 export function PaymentPageView({ content, plan }: PaymentPageViewProps) {
   return (
     <main>
-      <MembershipBreadcrumb items={content.breadcrumbs} />
+      <PageBreadcrumb items={content.breadcrumbs} />
 
       <section className="ees-green-pattern relative">
         <div className="absolute inset-x-0 top-0 bottom-[160px] rounded-b-[40px] bg-page-surface" />

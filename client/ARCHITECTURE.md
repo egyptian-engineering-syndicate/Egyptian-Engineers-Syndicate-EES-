@@ -71,11 +71,21 @@ features/
 |   |-- schemas/                    # Payment form schema
 |   |-- types/                      # Membership content contracts
 |   `-- index.ts
-`-- site-shell/
-    |-- components/
-    |-- data/
+|-- site-shell/
+|   |-- components/           # Header, footer, logo, nav + shared PageBreadcrumb
+|   |-- data/
+|   |-- types/
+|   `-- index.ts
+`-- trips/
+    |-- components/           # Trips page view, promo banner, search/grid, trip card
+    |-- data/                 # Promo + trip listing content adapter
     |-- types/
     `-- index.ts
 ```
 
-`membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation.
+`PageBreadcrumb` (the green pattern bar under the header) lives in `site-shell` because it is
+site chrome rather than any one feature's concern; `membership` and `trips` both consume it
+through `@/features/site-shell`.
+
+`membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
+sits in the same group for the same reason — its design also shows the signed-in header.

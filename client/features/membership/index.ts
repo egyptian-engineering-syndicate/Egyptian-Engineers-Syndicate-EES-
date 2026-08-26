@@ -8,7 +8,6 @@ export {
 } from "./data/membership-plans.content"
 export { membershipDemoUser } from "./data/membership-demo-user.content"
 export type {
-  BreadcrumbItem,
   MemberSummary,
   PaymentMethod,
   PaymentPageContent,

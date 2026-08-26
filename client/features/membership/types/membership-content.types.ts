@@ -1,3 +1,5 @@
+import type { BreadcrumbItem } from "@/features/site-shell"
+
 export type SubscriptionPlanId = "annual" | "three-year" | "five-year"
 
 export interface SubscriptionPlan {
@@ -8,11 +10,6 @@ export interface SubscriptionPlan {
   price: number
   currency: string
   features: string[]
-}
-
-export interface BreadcrumbItem {
-  label: string
-  href?: string
 }
 
 export interface MemberSummary {

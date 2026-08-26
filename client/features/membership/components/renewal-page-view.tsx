@@ -1,6 +1,7 @@
+import { PageBreadcrumb } from "@/features/site-shell"
+
 import type { RenewalPageContent } from "../types/membership-content.types"
 import { MemberSummaryCard } from "./member-summary-card"
-import { MembershipBreadcrumb } from "./membership-breadcrumb"
 import { RenewalPlansSection } from "./renewal-plans-section"
 
 interface RenewalPageViewProps {
@@ -10,7 +11,7 @@ interface RenewalPageViewProps {
 export function RenewalPageView({ content }: RenewalPageViewProps) {
   return (
     <main>
-      <MembershipBreadcrumb items={content.breadcrumbs} />
+      <PageBreadcrumb items={content.breadcrumbs} />
 
       <section className="bg-white pt-10 pb-14 sm:pt-12">
         <div className="mx-auto w-full max-w-[1640px] px-5 sm:px-8 lg:px-14">

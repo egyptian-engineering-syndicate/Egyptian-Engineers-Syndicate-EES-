@@ -1,13 +1,13 @@
 import Link from "next/link"
 import { ChevronLeft, House } from "lucide-react"
 
-import type { BreadcrumbItem } from "../types/membership-content.types"
+import type { BreadcrumbItem } from "../types/site-shell.types"
 
-interface MembershipBreadcrumbProps {
+interface PageBreadcrumbProps {
   items: BreadcrumbItem[]
 }
 
-export function MembershipBreadcrumb({ items }: MembershipBreadcrumbProps) {
+export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
   return (
     <section className="ees-green-pattern text-white">
       <div className="mx-auto flex h-[74px] w-full max-w-[1640px] items-center px-5 sm:px-8 lg:px-14">
