@@ -1,0 +1,54 @@
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+}
+
+.mainContent {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.headerSection {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.mainHeading {
+  font-family: "Neo Sans Arabic", var(--font-cairo), sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 40px;
+  letter-spacing: 0px;
+  text-align: right;
+  color: #181818;
+  margin: 0;
+  display: block;
+}
+
+.errorBanner {
+  max-width: 1920px;
+  margin: 1.5rem auto;
+  padding: 1rem 1.5rem;
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  color: #991b1b;
+  font-size: 15px;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .headerSection {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  .mainHeading {
+    font-size: 36px;
+    line-height: 36px;
+  }
+}
