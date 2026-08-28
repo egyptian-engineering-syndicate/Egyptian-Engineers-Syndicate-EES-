@@ -1,6 +1,5 @@
 "use client"
 
-import type { ComponentProps, ReactNode } from "react"
 import { useMemo } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -11,17 +10,20 @@ import {
 } from "lucide-react"
 import { useForm, useWatch } from "react-hook-form"
 
+import {
+  fieldIconClassName,
+  fieldInputClassName,
+  FormField,
+} from "@/components/form-field"
+import { PaymentMethodSelector } from "@/components/payment-method-selector"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { cn } from "@/lib/utils"
 
 import {
   createPaymentSchema,
   type PaymentFormValues,
 } from "../schemas/payment.schema"
 import type { PaymentPageContent } from "../types/membership-content.types"
-import { PaymentMethodSelector } from "./payment-method-selector"
 
 interface PaymentFormProps {
   content: PaymentPageContent
@@ -67,7 +69,7 @@ export function PaymentForm({ content }: PaymentFormProps) {
 
       {method === "card" ? (
         <div className="space-y-4">
-          <PaymentField
+          <FormField
             id="cardName"
             label={content.form.cardNameLabel}
             error={errors.cardName?.message}
@@ -75,13 +77,13 @@ export function PaymentForm({ content }: PaymentFormProps) {
             <Input
               id="cardName"
               placeholder={content.form.cardNamePlaceholder}
-              className={paymentInputClassName(Boolean(errors.cardName))}
+              className={fieldInputClassName(Boolean(errors.cardName))}
               {...register("cardName")}
             />
-            <UserRound aria-hidden="true" className={paymentIconClassName} />
-          </PaymentField>
+            <UserRound aria-hidden="true" className={fieldIconClassName} />
+          </FormField>
 
-          <PaymentField
+          <FormField
             id="cardNumber"
             label={content.form.cardNumberLabel}
             error={errors.cardNumber?.message}
@@ -90,14 +92,14 @@ export function PaymentForm({ content }: PaymentFormProps) {
               id="cardNumber"
               inputMode="numeric"
               placeholder={content.form.cardNumberPlaceholder}
-              className={paymentInputClassName(Boolean(errors.cardNumber))}
+              className={fieldInputClassName(Boolean(errors.cardNumber))}
               {...register("cardNumber")}
             />
-            <CreditCard aria-hidden="true" className={paymentIconClassName} />
-          </PaymentField>
+            <CreditCard aria-hidden="true" className={fieldIconClassName} />
+          </FormField>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <PaymentField
+            <FormField
               id="expiry"
               label={content.form.expiryLabel}
               error={errors.expiry?.message}
@@ -105,16 +107,16 @@ export function PaymentForm({ content }: PaymentFormProps) {
               <Input
                 id="expiry"
                 placeholder={content.form.expiryPlaceholder}
-                className={paymentInputClassName(Boolean(errors.expiry))}
+                className={fieldInputClassName(Boolean(errors.expiry))}
                 {...register("expiry")}
               />
               <CalendarDays
                 aria-hidden="true"
-                className={paymentIconClassName}
+                className={fieldIconClassName}
               />
-            </PaymentField>
+            </FormField>
 
-            <PaymentField
+            <FormField
               id="cvv"
               label={content.form.cvvLabel}
               error={errors.cvv?.message}
@@ -123,14 +125,14 @@ export function PaymentForm({ content }: PaymentFormProps) {
                 id="cvv"
                 inputMode="numeric"
                 placeholder={content.form.cvvPlaceholder}
-                className={paymentInputClassName(Boolean(errors.cvv))}
+                className={fieldInputClassName(Boolean(errors.cvv))}
                 {...register("cvv")}
               />
               <RectangleEllipsis
                 aria-hidden="true"
-                className={paymentIconClassName}
+                className={fieldIconClassName}
               />
-            </PaymentField>
+            </FormField>
           </div>
         </div>
       ) : null}
@@ -145,43 +147,5 @@ export function PaymentForm({ content }: PaymentFormProps) {
         </Button>
       </div>
     </form>
-  )
-}
-
-interface PaymentFieldProps {
-  id: string
-  label: string
-  error?: string
-  children: ReactNode
-}
-
-function PaymentField({ id, label, error, children }: PaymentFieldProps) {
-  return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between gap-4">
-        <Label htmlFor={id} className="text-sm text-neutral-600 sm:text-base">
-          {label}
-        </Label>
-        {error ? (
-          <span className="text-xs font-medium text-red-600" role="alert">
-            {error}
-          </span>
-        ) : null}
-      </div>
-      <div className="relative">{children}</div>
-    </div>
-  )
-}
-
-const paymentIconClassName =
-  "pointer-events-none absolute top-1/2 start-4 size-5 -translate-y-1/2 text-brand"
-
-function paymentInputClassName(
-  invalid: boolean
-): ComponentProps<typeof Input>["className"] {
-  return cn(
-    "h-14 w-full rounded-md border-transparent bg-neutral-100 ps-12 pe-4 text-start text-base text-neutral-900 shadow-none transition placeholder:text-neutral-400 focus-visible:border-brand focus-visible:bg-white focus-visible:ring-3 focus-visible:ring-brand/10",
-    invalid &&
-      "border-red-500 bg-red-50/50 focus:border-red-500 focus:ring-red-100"
   )
 }

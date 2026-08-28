@@ -1,3 +1,4 @@
+import type { PaymentMethod } from "@/components/payment-method-selector"
 import type { BreadcrumbItem } from "@/features/site-shell"
 
 export type SubscriptionPlanId = "annual" | "three-year" | "five-year"
@@ -35,11 +36,6 @@ export interface RenewalPageContent {
   }
   plans: SubscriptionPlan[]
   selectPlanLabel: string
-}
-
-export interface PaymentMethod {
-  id: "paytabs" | "fawry" | "card"
-  label: string
 }
 
 export interface PaymentFormValidationMessages {

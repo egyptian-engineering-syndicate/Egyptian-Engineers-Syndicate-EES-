@@ -5,7 +5,10 @@ import type { UseFormRegisterReturn } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 
-import type { PaymentMethod } from "../types/membership-content.types"
+export interface PaymentMethod {
+  id: "paytabs" | "fawry" | "card"
+  label: string
+}
 
 const iconMap = {
   paytabs: Wallet,

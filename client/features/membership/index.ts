@@ -9,7 +9,6 @@ export {
 export { membershipDemoUser } from "./data/membership-demo-user.content"
 export type {
   MemberSummary,
-  PaymentMethod,
   PaymentPageContent,
   RenewalPageContent,
   SubscriptionPlan,

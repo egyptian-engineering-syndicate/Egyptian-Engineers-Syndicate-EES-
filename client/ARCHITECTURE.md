@@ -71,6 +71,12 @@ features/
 |   |-- schemas/                    # Payment form schema
 |   |-- types/                      # Membership content contracts
 |   `-- index.ts
+|-- health-care/
+|   |-- components/           # Plan listing, plan card, details/booking page + form
+|   |-- data/                 # Plan listing + per-plan details content adapters
+|   |-- schemas/              # Booking form schema
+|   |-- types/
+|   `-- index.ts
 |-- site-shell/
 |   |-- components/           # Header, footer, logo, nav + shared PageBreadcrumb
 |   |-- data/
@@ -88,4 +94,10 @@ site chrome rather than any one feature's concern; `membership` and `trips` both
 through `@/features/site-shell`.
 
 `membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
-sits in the same group for the same reason — its design also shows the signed-in header.
+sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`) sits there too, for the same reason.
+
+`health-care`'s details/booking page (`/health-care/[planId]`) closely mirrors `trips`'s details/booking page (contact details + a member field-array + payment), reusing the shared `PaymentMethodSelector`, but the member section models a fixed "assigned engineer" plus a removable family-members array (relation + national ID) instead of trips's traveler array.
+
+`PaymentMethodSelector` (`components/payment-method-selector.tsx`) is a shared, business-agnostic component — `membership`, `trips`, and `health-care` all offer the same three payment methods (card/fawry/paytabs), so it lives directly under `components/` rather than inside any one feature. It isn't a shadcn primitive, so it sits alongside `theme-provider.tsx` rather than in `components/ui/`.
+
+`components/form-field.tsx` is the same story for the labeled-field wrapper (label + inline error + relative-positioned slot for an input/icon) all three features' forms use, plus its `fieldInputClassName`/`fieldIconClassName` styling helpers — hoisted after `trips` and `health-care` had copied it byte-for-byte from `membership`.
