@@ -16,3 +16,13 @@ will stop hardcoding once Directus assets are wired up. All from Wikimedia Commo
 - `trips/hurghada.jpg`: "Hurghada, Qesm Hurghada, Red Sea Governorate, Egypt - panoramio (145)" by Максим Улитин, CC BY 3.0 — https://commons.wikimedia.org/wiki/File:Hurghada,_Qesm_Hurghada,_Red_Sea_Governorate,_Egypt_-_panoramio_(145).jpg
 - `trips/luxor.jpg`: "Luxor Temple R04" by Marc Ryckaert, CC BY 3.0 — https://commons.wikimedia.org/wiki/File:Luxor_Temple_R04.jpg
 - `trips/tbilisi.jpg`: "20110421 Tbilisi Georgia Panoramic" by User:Ggia, CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:20110421_Tbilisi_Georgia_Panoramic.jpg
+
+## `committees/` — placeholders
+
+Temporary stand-ins for the committee photos that
+`features/committees/data/*.content.ts` will stop hardcoding once Directus assets
+are wired up. All CC0, via Wikimedia Commons' Unsplash imports:
+
+- `committees/committee-building.jpg`: "Squares and lines (Unsplash)" by Joel Filipe, CC0 — https://commons.wikimedia.org/wiki/File:Squares_and_lines_(Unsplash).jpg
+- `committees/member-1.jpg`: "Elegant man in the autumn (Unsplash)" by Joshua Reddekopp, CC0 — https://commons.wikimedia.org/wiki/File:Elegant_man_in_the_autumn_(Unsplash).jpg
+- `committees/member-2.jpg`: "Man with a white beard and glasses, by Angelina Litvin, 2015-10-05 (Unsplash)" by Angelina Litvin, CC0 — https://commons.wikimedia.org/wiki/File:Man_with_a_white_beard_and_glasses,_by_Angelina_Litvin,_2015-10-05_(Unsplash).jpg

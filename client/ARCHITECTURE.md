@@ -71,6 +71,11 @@ features/
 |   |-- schemas/                    # Payment form schema
 |   |-- types/                      # Membership content contracts
 |   `-- index.ts
+|-- committees/
+|   |-- components/           # Committees listing/grid, committee card, details page + member card
+|   |-- data/                 # Committee listing + per-committee details content adapters
+|   |-- types/
+|   `-- index.ts
 |-- health-care/
 |   |-- components/           # Plan listing, plan card, details/booking page + form
 |   |-- data/                 # Plan listing + per-plan details content adapters
@@ -94,10 +99,16 @@ site chrome rather than any one feature's concern; `membership` and `trips` both
 through `@/features/site-shell`.
 
 `membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
-sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`) sits there too, for the same reason.
+sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`) and `committees` (`/committees`, `/committees/[committeeId]`) sit there too, for the same reason.
 
 `health-care`'s details/booking page (`/health-care/[planId]`) closely mirrors `trips`'s details/booking page (contact details + a member field-array + payment), reusing the shared `PaymentMethodSelector`, but the member section models a fixed "assigned engineer" plus a removable family-members array (relation + national ID) instead of trips's traveler array.
 
 `PaymentMethodSelector` (`components/payment-method-selector.tsx`) is a shared, business-agnostic component — `membership`, `trips`, and `health-care` all offer the same three payment methods (card/fawry/paytabs), so it lives directly under `components/` rather than inside any one feature. It isn't a shadcn primitive, so it sits alongside `theme-provider.tsx` rather than in `components/ui/`.
 
 `components/form-field.tsx` is the same story for the labeled-field wrapper (label + inline error + relative-positioned slot for an input/icon) all three features' forms use, plus its `fieldInputClassName`/`fieldIconClassName` styling helpers — hoisted after `trips` and `health-care` had copied it byte-for-byte from `membership`.
+
+`committees` has no form, so it carries no `schemas/`. Its details page is the one layout in
+the app that is not a stack of cards: a full-bleed grey band holds the committee brief while
+the photo beside it spans two grid rows so it overhangs into the first row of member cards.
+That overhang is why `CommitteeDetailsPageView` sets `overflow-x-clip` on `<main>` — the band
+bleeds past both viewport edges and would otherwise add a horizontal scrollbar in RTL.
