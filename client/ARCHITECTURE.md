@@ -1,5 +1,8 @@
 # Project architecture
 
+Visual conventions (tokens, page skeleton, card/form/button classes, RTL rules) live
+in `DESIGN-SYSTEM.md`. This file covers structure; that one covers what it looks like.
+
 This project uses Next.js App Router with feature-based organization. Application code stays in top-level folders because this repository already uses a root `app` directory.
 
 ## Dependency direction
@@ -77,7 +80,8 @@ features/
 |   |-- types/
 |   `-- index.ts
 |-- health-care/
-|   |-- components/           # Plan listing, plan card, details/booking page + form
+|   |-- components/           # Plan listing, plan card, rules/special-cases/documents cards,
+|   |                         # details/booking page + form + attached-documents card
 |   |-- data/                 # Plan listing + per-plan details content adapters
 |   |-- schemas/              # Booking form schema
 |   |-- types/
@@ -101,9 +105,20 @@ through `@/features/site-shell`.
 `membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
 sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`) and `committees` (`/committees`, `/committees/[committeeId]`) sit there too, for the same reason.
 
-`health-care`'s details/booking page (`/health-care/[planId]`) closely mirrors `trips`'s details/booking page (contact details + a member field-array + payment), reusing the shared `PaymentMethodSelector`, but the member section models a fixed "assigned engineer" plus a removable family-members array (relation + national ID) instead of trips's traveler array.
+`health-care`'s listing page is a stack of copy-only cards (general rules, special
+cases, required documents) above the two plan cards; each numbered line carries its
+own authored `marker` string rather than relying on `<ol>` numbering, and renders it
+inside a `dir="ltr"` span so bidi doesn't mirror the `1)` bracket in the RTL
+paragraph.
+
+`health-care`'s details/booking page (`/health-care/[planId]`) closely mirrors `trips`'s details/booking page (contact details + a member field-array + payment), reusing the shared `PaymentMethodSelector`, but the member section models a fixed "assigned engineer" plus a removable family-members array (relation + national ID) instead of trips's traveler array. It also carries an attached-documents card (checklist + file dropzone + notes + submit/back) between the family and payment cards; the picked `File` objects stay in that component's state rather than in the Zod schema, since nothing is uploaded until a booking endpoint exists.
 
 `PaymentMethodSelector` (`components/payment-method-selector.tsx`) is a shared, business-agnostic component — `membership`, `trips`, and `health-care` all offer the same three payment methods (card/fawry/paytabs), so it lives directly under `components/` rather than inside any one feature. It isn't a shadcn primitive, so it sits alongside `theme-provider.tsx` rather than in `components/ui/`.
+
+`components/surface-card.tsx` is the same story again: `SurfaceCard` (and the
+`surfaceCardClassName` behind it) is the white, soft-shadowed content card the
+designs stack down every inner page — hoisted once `trips` and `health-care` were
+carrying a byte-identical `bookingCardClassName`.
 
 `components/form-field.tsx` is the same story for the labeled-field wrapper (label + inline error + relative-positioned slot for an input/icon) all three features' forms use, plus its `fieldInputClassName`/`fieldIconClassName` styling helpers — hoisted after `trips` and `health-care` had copied it byte-for-byte from `membership`.
 

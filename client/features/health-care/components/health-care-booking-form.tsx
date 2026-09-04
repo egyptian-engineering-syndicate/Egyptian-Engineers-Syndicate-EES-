@@ -20,8 +20,8 @@ import {
   FormField,
 } from "@/components/form-field"
 import { PaymentMethodSelector } from "@/components/payment-method-selector"
+import { SurfaceCard } from "@/components/surface-card"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
@@ -34,6 +34,7 @@ import type {
   FamilyMembersContent,
   HealthCareDetailsPageContent,
 } from "../types/health-care-content.types"
+import { HealthCareAttachedDocumentsCard } from "./health-care-attached-documents-card"
 
 const familyMemberOrdinals = [
   "الاول",
@@ -61,8 +62,14 @@ interface HealthCareBookingFormProps {
 }
 
 export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
-  const { contact, assignedEngineer, familyMembers, payment, validation } =
-    content
+  const {
+    contact,
+    assignedEngineer,
+    familyMembers,
+    attachedDocuments,
+    payment,
+    validation,
+  } = content
 
   const schema = useMemo(
     () => createHealthCareBookingSchema(validation),
@@ -85,6 +92,8 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
       familyMembers: Array.from({ length: familyMembers.initialCount }, () =>
         emptyFamilyMember(familyMembers)
       ),
+      documents: [],
+      notes: "",
       method: "card",
       cardName: "",
       cardNumber: "",
@@ -106,7 +115,7 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Card className={bookingCardClassName}>
+      <SurfaceCard>
         <h2 className="text-lg font-extrabold text-neutral-950 sm:text-xl">
           {contact.title}
         </h2>
@@ -143,9 +152,9 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
             <Mail aria-hidden="true" className={fieldIconClassName} />
           </FormField>
         </div>
-      </Card>
+      </SurfaceCard>
 
-      <Card className={bookingCardClassName}>
+      <SurfaceCard>
         <h2 className="text-lg font-extrabold text-neutral-950 sm:text-xl">
           {familyMembers.title}
         </h2>
@@ -164,8 +173,7 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
               <div
                 className={cn(
                   "flex h-14 w-full items-center rounded-md bg-neutral-100 transition focus-within:bg-white focus-within:ring-3 focus-within:ring-brand/10",
-                  errors.engineerCardName &&
-                    "bg-red-50/50 ring-1 ring-red-500"
+                  errors.engineerCardName && "bg-red-50/50 ring-1 ring-red-500"
                 )}
               >
                 <span className="ms-4 shrink-0 rounded-full bg-white px-3 py-1 text-xs font-semibold text-brand">
@@ -307,15 +315,25 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
           <Button
             type="button"
             variant="outline"
-            onClick={() => memberFields.append(emptyFamilyMember(familyMembers))}
+            onClick={() =>
+              memberFields.append(emptyFamilyMember(familyMembers))
+            }
             className="h-14 rounded-md border-neutral-200 bg-white px-7 text-sm font-medium text-neutral-700"
           >
             {familyMembers.addMemberLabel}
           </Button>
         </div>
-      </Card>
+      </SurfaceCard>
 
-      <Card className={bookingCardClassName}>
+      <HealthCareAttachedDocumentsCard
+        content={attachedDocuments}
+        control={control}
+        register={register}
+        errors={errors}
+        isSubmitting={isSubmitting}
+      />
+
+      <SurfaceCard>
         <h2 className="text-2xl font-extrabold text-neutral-950 sm:text-3xl">
           {payment.title}
         </h2>
@@ -384,10 +402,7 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
                 className={fieldInputClassName(Boolean(errors.expiry))}
                 {...register("expiry")}
               />
-              <CalendarDays
-                aria-hidden="true"
-                className={fieldIconClassName}
-              />
+              <CalendarDays aria-hidden="true" className={fieldIconClassName} />
             </FormField>
 
             <FormField
@@ -419,10 +434,7 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
             {payment.form.submitLabel}
           </Button>
         </div>
-      </Card>
+      </SurfaceCard>
     </form>
   )
 }
-
-const bookingCardClassName =
-  "gap-0 rounded-xl border-0 bg-white px-6 py-7 shadow-[0_12px_28px_rgba(0,0,0,.06)] ring-0 sm:px-7"

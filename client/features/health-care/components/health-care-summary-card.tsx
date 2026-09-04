@@ -16,9 +16,7 @@ interface HealthCareSummaryCardProps {
   summary: HealthCareDetailsSummary
 }
 
-export function HealthCareSummaryCard({
-  summary,
-}: HealthCareSummaryCardProps) {
+export function HealthCareSummaryCard({ summary }: HealthCareSummaryCardProps) {
   const Icon = iconMap[summary.icon]
 
   return (

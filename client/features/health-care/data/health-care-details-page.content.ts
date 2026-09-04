@@ -22,6 +22,35 @@ const assignedEngineer: HealthCareDetailsPageContent["assignedEngineer"] = {
   cardNamePlaceholder: "الاسم كامل في البطاقة",
 }
 
+const attachedDocuments: HealthCareDetailsPageContent["attachedDocuments"] = {
+  title: "المستندات المرفقة",
+  options: [
+    { id: "syndicate-card", label: "صورة كارنيه النقابة." },
+    { id: "national-id", label: "صورة بطاقة الرقم القومي." },
+    {
+      id: "subscription-receipt",
+      label: "إيصال سداد اشتراك النقابة للعام الحالي.",
+    },
+    {
+      id: "member-photo",
+      label: "صورة شخصية لكل عضو (عدا الأطفال أقل من 3 سنوات).",
+    },
+    {
+      id: "kinship-proof",
+      label:
+        "إثبات صلة القرابة للأعضاء التابعين بالعضو الأصلي (بالوثائق المعترف بها).",
+    },
+  ],
+  uploadLabel: "تحميل الملفات",
+  selectedFilesLabel: "الملفات المرفقة",
+  removeFileLabel: "حذف",
+  notesLabel: "ملاحظات إضافية (اختياري)",
+  notesPlaceholder: "ملاحظات إضافية",
+  submitLabel: "اتمام الدفع",
+  backLabel: "رجوع",
+  backHref: "/health-care",
+}
+
 const payment: HealthCareDetailsPageContent["payment"] = {
   title: "الدفع",
   subtitle: "احجز رعايتك الان",
@@ -57,6 +86,7 @@ const validation: HealthCareDetailsPageContent["validation"] = {
   engineerCardNameRequired: "الاسم كامل في البطاقة مطلوب",
   memberNationalIdRequired: "الرقم القومي مطلوب",
   memberCardNameRequired: "الاسم كامل في البطاقة مطلوب",
+  notesTooLong: "الملاحظات الإضافية يجب ألا تتجاوز 500 حرف",
   cardNameRequired: "اسم البطاقة مطلوب",
   cardNumberRequired: "رقم البطاقة مطلوب",
   cardNumberInvalid: "أدخل رقم بطاقة صحيح مكون من 16 رقم",
@@ -103,6 +133,7 @@ const healthCareDetailsPageContent: Record<
       removeMemberLabel: "حذف",
       initialCount: 1,
     },
+    attachedDocuments,
     payment,
     validation,
   },
@@ -115,8 +146,7 @@ const healthCareDetailsPageContent: Record<
     summary: {
       icon: "individual",
       title: "رعاية فردية",
-      description:
-        "رعاية فردية خاصة بالمهندس المتقدم فقط لجميع النواحي الصحية",
+      description: "رعاية فردية خاصة بالمهندس المتقدم فقط لجميع النواحي الصحية",
       price: 1800,
       currency: "جنيه",
     },
@@ -139,6 +169,7 @@ const healthCareDetailsPageContent: Record<
       removeMemberLabel: "حذف",
       initialCount: 0,
     },
+    attachedDocuments,
     payment: { ...payment, totalPrice: 300 },
     validation,
   },

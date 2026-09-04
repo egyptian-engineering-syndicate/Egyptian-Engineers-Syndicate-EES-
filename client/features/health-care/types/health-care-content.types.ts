@@ -14,11 +14,42 @@ export interface HealthCarePlan {
   subscribeHref: string
 }
 
+/** A rule/document line rendered with its own literal marker, e.g. `1)`. */
+export interface HealthCareNumberedLine {
+  /** Marker shown before the text. Authored, not derived from the index, so the
+   *  card mirrors the numbering used in the syndicate's printed regulations. */
+  marker: string
+  text: string
+}
+
+export interface HealthCareRulesContent {
+  title: string
+  rules: HealthCareNumberedLine[]
+}
+
+export interface HealthCareSpecialCase {
+  title: string
+  description: string
+}
+
+export interface HealthCareSpecialCasesContent {
+  title: string
+  cases: HealthCareSpecialCase[]
+}
+
+export interface HealthCareRequiredDocumentsContent {
+  title: string
+  documents: HealthCareNumberedLine[]
+}
+
 export interface HealthCarePageContent {
   breadcrumbs: BreadcrumbItem[]
   title: string
   description: string
   subscribeLabel: string
+  rules: HealthCareRulesContent
+  specialCases: HealthCareSpecialCasesContent
+  requiredDocuments: HealthCareRequiredDocumentsContent
   plans: HealthCarePlan[]
 }
 
@@ -68,6 +99,24 @@ export interface FamilyMembersContent {
   initialCount: number
 }
 
+export interface AttachedDocumentOption {
+  id: string
+  label: string
+}
+
+export interface AttachedDocumentsContent {
+  title: string
+  options: AttachedDocumentOption[]
+  uploadLabel: string
+  selectedFilesLabel: string
+  removeFileLabel: string
+  notesLabel: string
+  notesPlaceholder: string
+  submitLabel: string
+  backLabel: string
+  backHref: string
+}
+
 export interface HealthCarePaymentFormContent {
   cardNameLabel: string
   cardNamePlaceholder: string
@@ -101,6 +150,7 @@ export interface HealthCareBookingValidationMessages {
   engineerCardNameRequired: string
   memberNationalIdRequired: string
   memberCardNameRequired: string
+  notesTooLong: string
   cardNameRequired: string
   cardNumberRequired: string
   cardNumberInvalid: string
@@ -116,6 +166,7 @@ export interface HealthCareDetailsPageContent {
   contact: ContactDetailsContent
   assignedEngineer: AssignedEngineerContent
   familyMembers: FamilyMembersContent
+  attachedDocuments: AttachedDocumentsContent
   payment: HealthCarePaymentContent
   validation: HealthCareBookingValidationMessages
 }

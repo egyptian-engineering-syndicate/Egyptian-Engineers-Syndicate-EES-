@@ -41,6 +41,8 @@ export function createHealthCareBookingSchema(
           cardName: z.string().trim().min(1, messages.memberCardNameRequired),
         })
       ),
+      documents: z.array(z.string()),
+      notes: z.string().trim().max(500, messages.notesTooLong).optional(),
       method: z.enum(["paytabs", "fawry", "card"]),
       cardName: z.string().trim().optional(),
       cardNumber: z.string().trim().optional(),

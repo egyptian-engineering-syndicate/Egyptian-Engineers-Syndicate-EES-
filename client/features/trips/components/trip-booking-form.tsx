@@ -20,8 +20,8 @@ import {
   FormField,
 } from "@/components/form-field"
 import { PaymentMethodSelector } from "@/components/payment-method-selector"
+import { SurfaceCard } from "@/components/surface-card"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
@@ -95,7 +95,7 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         <CancellationPolicyCard content={cancellationPolicy} />
 
-        <Card className={bookingCardClassName}>
+        <SurfaceCard>
           <h2 className="text-lg font-extrabold text-neutral-950 sm:text-xl">
             {contact.title}
           </h2>
@@ -132,10 +132,10 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
               <Mail aria-hidden="true" className={fieldIconClassName} />
             </FormField>
           </div>
-        </Card>
+        </SurfaceCard>
       </div>
 
-      <Card className={bookingCardClassName}>
+      <SurfaceCard>
         <h2 className="text-lg font-extrabold text-neutral-950 sm:text-xl">
           {travelers.title}
         </h2>
@@ -255,9 +255,9 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
             {travelers.addTravelerLabel}
           </Button>
         </div>
-      </Card>
+      </SurfaceCard>
 
-      <Card className={bookingCardClassName}>
+      <SurfaceCard>
         <h2 className="text-2xl font-extrabold text-neutral-950 sm:text-3xl">
           {payment.title}
         </h2>
@@ -326,10 +326,7 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
                 className={fieldInputClassName(Boolean(errors.expiry))}
                 {...register("expiry")}
               />
-              <CalendarDays
-                aria-hidden="true"
-                className={fieldIconClassName}
-              />
+              <CalendarDays aria-hidden="true" className={fieldIconClassName} />
             </FormField>
 
             <FormField
@@ -361,10 +358,7 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
             {payment.form.submitLabel}
           </Button>
         </div>
-      </Card>
+      </SurfaceCard>
     </form>
   )
 }
-
-const bookingCardClassName =
-  "gap-0 rounded-xl border-0 bg-white px-6 py-7 shadow-[0_12px_28px_rgba(0,0,0,.06)] ring-0 sm:px-7"

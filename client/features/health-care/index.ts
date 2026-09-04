@@ -7,8 +7,15 @@ export type {
   HealthCarePlanId,
   HealthCarePlanIcon,
   HealthCarePageContent,
+  HealthCareNumberedLine,
+  HealthCareRulesContent,
+  HealthCareSpecialCase,
+  HealthCareSpecialCasesContent,
+  HealthCareRequiredDocumentsContent,
 } from "./types/health-care-content.types"
 export type {
+  AttachedDocumentOption,
+  AttachedDocumentsContent,
   ContactDetailsContent,
   AssignedEngineerContent,
   FamilyMembersContent,

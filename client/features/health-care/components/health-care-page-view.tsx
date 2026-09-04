@@ -2,6 +2,9 @@ import { PageBreadcrumb } from "@/features/site-shell"
 
 import type { HealthCarePageContent } from "../types/health-care-content.types"
 import { HealthCarePlanCard } from "./health-care-plan-card"
+import { HealthCareRequiredDocumentsCard } from "./health-care-required-documents-card"
+import { HealthCareRulesCard } from "./health-care-rules-card"
+import { HealthCareSpecialCasesCard } from "./health-care-special-cases-card"
 
 interface HealthCarePageViewProps {
   content: HealthCarePageContent
@@ -20,7 +23,15 @@ export function HealthCarePageView({ content }: HealthCarePageViewProps) {
           {content.description}
         </p>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="mt-8 space-y-6 sm:space-y-8">
+          <HealthCareRulesCard content={content.rules} />
+          <HealthCareSpecialCasesCard content={content.specialCases} />
+          <HealthCareRequiredDocumentsCard
+            content={content.requiredDocuments}
+          />
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-2 lg:gap-8">
           {content.plans.map((plan) => (
             <HealthCarePlanCard
               key={plan.id}
