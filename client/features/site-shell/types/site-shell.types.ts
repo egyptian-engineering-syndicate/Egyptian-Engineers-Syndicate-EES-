@@ -12,6 +12,8 @@ export interface NavigationItem {
 export interface SiteShellUser {
   greeting: string
   name: string
+  /** Where the header's user chip goes — the member's profile page. */
+  profileHref: string
 }
 
 export interface SiteShellContent {

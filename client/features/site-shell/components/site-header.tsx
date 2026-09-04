@@ -99,7 +99,10 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
           </nav>
 
           {user ? (
-            <div className="hidden min-w-44 items-center gap-3 2xl:flex">
+            <Link
+              href={user.profileHref}
+              className="hidden min-w-44 items-center gap-3 rounded-md transition-colors hover:bg-brand/5 2xl:flex"
+            >
               <div className="grid size-14 place-items-center rounded-md bg-[#edf8f4] text-brand">
                 <UserRound
                   aria-hidden="true"
@@ -111,7 +114,7 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
                 <p className="text-neutral-500">{user.greeting}</p>
                 <p className="font-semibold text-neutral-800">{user.name}</p>
               </div>
-            </div>
+            </Link>
           ) : (
             <Button
               asChild

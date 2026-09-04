@@ -86,6 +86,12 @@ features/
 |   |-- schemas/              # Booking form schema
 |   |-- types/
 |   `-- index.ts
+|-- profile/
+|   |-- components/           # Member card, booking card, booking-details cards,
+|   |                         # subscription data/documents cards + shared detail field
+|   |-- data/                 # Profile page + per-booking / per-subscription adapters
+|   |-- types/
+|   `-- index.ts
 |-- site-shell/
 |   |-- components/           # Header, footer, logo, nav + shared PageBreadcrumb
 |   |-- data/
@@ -103,7 +109,7 @@ site chrome rather than any one feature's concern; `membership` and `trips` both
 through `@/features/site-shell`.
 
 `membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
-sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`) and `committees` (`/committees`, `/committees/[committeeId]`) sit there too, for the same reason.
+sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`), `committees` (`/committees`, `/committees/[committeeId]`) and `profile` (`/profile`, `/profile/bookings/[bookingId]`, `/profile/subscriptions/[subscriptionId]`) sit there too, for the same reason.
 
 `health-care`'s listing page is a stack of copy-only cards (general rules, special
 cases, required documents) above the two plan cards; each numbered line carries its
@@ -121,6 +127,18 @@ designs stack down every inner page — hoisted once `trips` and `health-care` w
 carrying a byte-identical `bookingCardClassName`.
 
 `components/form-field.tsx` is the same story for the labeled-field wrapper (label + inline error + relative-positioned slot for an input/icon) all three features' forms use, plus its `fieldInputClassName`/`fieldIconClassName` styling helpers — hoisted after `trips` and `health-care` had copied it byte-for-byte from `membership`.
+
+`profile` (`/profile`, `/profile/bookings/[bookingId]`,
+`/profile/subscriptions/[subscriptionId]`) is read-only: it renders stored member data,
+so it has no `schemas/` and no form. Its `ProfileDetailField` is the label + value pair
+that replaces `FormField` on these pages. The listing page's booking cards deliberately
+duplicate `trips`'s `TripCard` shape rather than importing it — `TripCard` is a `trips`
+internal, and the booking card drops the perk pills and swaps the CTA. The two "cancel"
+buttons on the booking-details page are visual only until a cancellation endpoint exists,
+which is what keeps that whole route a Server Component.
+
+`SiteShellUser` now carries a `profileHref`, so the header's signed-in chip (desktop and
+mobile) links to the profile — otherwise nothing in the chrome reaches these routes.
 
 `committees` has no form, so it carries no `schemas/`. Its details page is the one layout in
 the app that is not a stack of cards: a full-bleed grey band holds the committee brief while

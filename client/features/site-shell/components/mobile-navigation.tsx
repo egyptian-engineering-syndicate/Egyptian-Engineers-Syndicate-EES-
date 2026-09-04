@@ -55,10 +55,14 @@ export function MobileNavigation({
               ))}
             </ul>
             {user ? (
-              <div className="mt-3 rounded-md bg-brand/5 px-4 py-3 text-sm">
+              <Link
+                href={user.profileHref}
+                onClick={() => setOpen(false)}
+                className="mt-3 block rounded-md bg-brand/5 px-4 py-3 text-sm"
+              >
                 <p className="text-neutral-500">{user.greeting}</p>
                 <p className="font-semibold text-brand">{user.name}</p>
-              </div>
+              </Link>
             ) : (
               <Link
                 href={login.href}

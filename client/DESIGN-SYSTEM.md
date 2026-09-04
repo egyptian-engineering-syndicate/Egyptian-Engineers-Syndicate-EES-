@@ -90,6 +90,7 @@ Every inner page is the same three parts:
 | Page subtitle                      | `text-sm text-neutral-500 sm:text-base`                 |
 | Emphasised block heading (payment) | `text-2xl font-extrabold text-neutral-950 sm:text-3xl`  |
 | Content card heading               | `text-xl font-extrabold text-neutral-950 sm:text-2xl`   |
+| Brand card heading (profile data)  | `text-lg font-extrabold text-brand sm:text-xl`          |
 | Form section heading               | `text-lg font-extrabold text-neutral-950 sm:text-xl`    |
 | Sub-group label inside a card      | `text-sm font-bold text-neutral-950`                    |
 | Accent sub-heading                 | `text-sm font-bold text-brand sm:text-base`             |
@@ -129,6 +130,14 @@ by hand, so they keep the project's `radix-nova` style.
 
 For a wider, copy-only card (rules, policies) pad it out:
 `<SurfaceCard className="sm:px-8 sm:py-8">`.
+
+### Read-only field
+
+Pages that print stored data instead of collecting it (the whole `profile`
+feature) use `ProfileDetailField` rather than `FormField`: the muted label sits
+above the value, and the value is `text-base font-bold text-neutral-950 sm:text-lg`
+— or `text-brand` for the values the designs highlight (names, service length,
+amounts). Grids are the same `gap-4 sm:grid-cols-2` as the form ones.
 
 ### Icon tile
 
@@ -199,6 +208,7 @@ Owned by the feature: `schemas/<name>.schema.ts` (Zod, built by a
 | Secondary / back    | `variant="outline"` + `h-14 rounded-md bg-white px-8 text-base font-semibold text-neutral-700`      |
 | In-card CTA         | `h-11 rounded-md bg-brand px-7 text-sm font-semibold text-white hover:bg-brand-strong`              |
 | Inline destructive  | plain `<button>` + `flex items-center gap-1.5 text-sm font-medium text-red-600 hover:text-red-700`  |
+| Destructive action  | `variant="outline"` + `h-14 min-w-44 rounded-md border-red-500/60 bg-white px-8 text-base font-semibold text-red-600 hover:bg-red-50 hover:text-red-700` |
 
 Buttons that navigate use `asChild` + `next/link`, never `onClick` + router.
 
