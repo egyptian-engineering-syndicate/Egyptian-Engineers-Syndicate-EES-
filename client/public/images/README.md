@@ -26,3 +26,11 @@ are wired up. All CC0, via Wikimedia Commons' Unsplash imports:
 - `committees/committee-building.jpg`: "Squares and lines (Unsplash)" by Joel Filipe, CC0 — https://commons.wikimedia.org/wiki/File:Squares_and_lines_(Unsplash).jpg
 - `committees/member-1.jpg`: "Elegant man in the autumn (Unsplash)" by Joshua Reddekopp, CC0 — https://commons.wikimedia.org/wiki/File:Elegant_man_in_the_autumn_(Unsplash).jpg
 - `committees/member-2.jpg`: "Man with a white beard and glasses, by Angelina Litvin, 2015-10-05 (Unsplash)" by Angelina Litvin, CC0 — https://commons.wikimedia.org/wiki/File:Man_with_a_white_beard_and_glasses,_by_Angelina_Litvin,_2015-10-05_(Unsplash).jpg
+
+## Training courses — placeholder
+
+The training feature has no photos of its own yet: every course in
+`features/training/data/training-page.content.ts` points at
+`login-construction.jpg` above, so the cards and the course hero have something to
+show. Replace it with per-course Directus assets — one image per course — when the
+CMS wiring lands, and record the new credits here.

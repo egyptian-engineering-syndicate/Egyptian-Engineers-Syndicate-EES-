@@ -37,9 +37,12 @@ use `border-red-500` + `bg-red-50/50`.
 
 ### Patterns
 
-Two CSS classes in `globals.css` paint the syndicate's geometric pattern:
+Three CSS classes in `globals.css` paint the syndicate's geometric pattern. They share
+the same geometry and only pick a ground colour and a `--ees-pattern-ink`:
 
-- `.ees-green-pattern` — brand background, used by `PageBreadcrumb`.
+- `.ees-green-pattern` — brand background, used by `PageBreadcrumb` and the band
+  behind the course subscription card.
+- `.ees-grey-pattern` — `#e9e9e9` background, used for the course topics band.
 - `.ees-light-pattern` — white background, used for light pattern bands.
 
 ### Radius, shadow, spacing
@@ -79,6 +82,8 @@ Every inner page is the same three parts:
 - Signed-in pages go in `app/(member)/`; guest pages in `app/(website)/`.
 - A section that bleeds past the viewport (see `committees`) needs
   `overflow-x-clip` on `<main>` so RTL doesn't gain a horizontal scrollbar.
+- A details page may be a stack of full-width bands instead of cards (`committees`,
+  `training`); the container above still governs the content inside each band.
 
 ---
 
@@ -114,6 +119,7 @@ them instead of re-styling.
 | `fieldIconClassName`                    | `@/components/form-field`             | brand icon pinned at `start-4`, vertically centred                                                                    |
 | `PaymentMethodSelector`                 | `@/components/payment-method-selector` | the three-up card/fawry/paytabs radio row                                                                            |
 | `PageBreadcrumb`                        | `@/features/site-shell`               | the green pattern bar under the header                                                                                |
+| `normalizeArabicText`                   | `@/lib/arabic-text`                   | tashkeel/alef folding for a listing page's search box (`trips`, `training`)                                          |
 | shadcn primitives                       | `@/components/ui/*`                   | `button`, `card`, `input`, `label`, `checkbox`, `textarea`                                                             |
 
 Add primitives with the shadcn CLI (`./node_modules/.bin/shadcn add <name>`), never
@@ -130,6 +136,29 @@ by hand, so they keep the project's `radix-nova` style.
 
 For a wider, copy-only card (rules, policies) pad it out:
 `<SurfaceCard className="sm:px-8 sm:py-8">`.
+
+### Card chips
+
+Pill labels on a card are `rounded-full px-3 py-1 text-xs font-medium text-brand`:
+outlined (`border border-brand/30`) when several sit in a row (trip perks), filled
+with the brand tint (`bg-[#edf8f4]`) for a single status chip beside a title (the
+course level).
+
+### Photo in a green frame
+
+Where the design offsets a photo against the brand colour (`committees`, `training`),
+the frame is a bare span behind an absolutely positioned image, both inside a
+`relative` box that owns the aspect ratio:
+
+```tsx
+<div className="relative aspect-[16/10] w-full">
+  <span
+    aria-hidden="true"
+    className="absolute inset-x-6 -top-4 -bottom-4 rounded-xl bg-brand"
+  />
+  <div className="absolute inset-0 overflow-hidden rounded-xl">{/* <Image fill /> */}</div>
+</div>
+```
 
 ### Read-only field
 

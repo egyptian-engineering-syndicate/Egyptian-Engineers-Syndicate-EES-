@@ -97,6 +97,13 @@ features/
 |   |-- data/
 |   |-- types/
 |   `-- index.ts
+|-- training/
+|   |-- components/           # Courses listing/search/grid, course card, details page
+|   |                         # (overview + topics band) and subscription form
+|   |-- data/                 # Course listing + per-course details content adapters
+|   |-- schemas/              # Course subscription (payment) form schema
+|   |-- types/
+|   `-- index.ts
 `-- trips/
     |-- components/           # Trips page view, promo banner, search/grid, trip card
     |-- data/                 # Promo + trip listing content adapter
@@ -109,7 +116,7 @@ site chrome rather than any one feature's concern; `membership` and `trips` both
 through `@/features/site-shell`.
 
 `membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
-sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`), `committees` (`/committees`, `/committees/[committeeId]`) and `profile` (`/profile`, `/profile/bookings/[bookingId]`, `/profile/subscriptions/[subscriptionId]`) sit there too, for the same reason.
+sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`), `committees` (`/committees`, `/committees/[committeeId]`), `profile` (`/profile`, `/profile/bookings/[bookingId]`, `/profile/subscriptions/[subscriptionId]`) and `training` (`/training`, `/training/[courseId]`) sit there too, for the same reason.
 
 `health-care`'s listing page is a stack of copy-only cards (general rules, special
 cases, required documents) above the two plan cards; each numbered line carries its
@@ -145,3 +152,17 @@ the app that is not a stack of cards: a full-bleed grey band holds the committee
 the photo beside it spans two grid rows so it overhangs into the first row of member cards.
 That overhang is why `CommitteeDetailsPageView` sets `overflow-x-clip` on `<main>` — the band
 bleeds past both viewport edges and would otherwise add a horizontal scrollbar in RTL.
+
+`training` (`/training`, `/training/[courseId]`) is the listing/details pair again, but the
+details route is not a stack of cards: an overview band (copy beside a photo in a green
+offset frame), then a grey pattern band of course topics, then the subscription card sitting
+over a green band. Only the subscription card is a form — the payment fields alone — so the
+feature's `schemas/` holds just that one schema, and everything above it stays a Server
+Component. `getCourseDetailsPageContent(courseId)` composes the details content from the
+listing entry (title, price, image) plus the per-course copy in the same adapter, so a course
+is authored once; an unknown id falls back to the first course until the Directus queries land.
+
+`lib/arabic-text.ts` holds `normalizeArabicText` — the tashkeel/alef/ya folding both search
+boxes (`trips`, `training`) run over the query and the searched fields. It's business-agnostic,
+so it belongs in `lib` rather than in either feature; it was hoisted out of `TripsSection` when
+`TrainingCoursesSection` needed the identical helper.

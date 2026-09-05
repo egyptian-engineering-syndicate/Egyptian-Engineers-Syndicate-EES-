@@ -6,22 +6,12 @@ import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { normalizeArabicText } from "@/lib/arabic-text"
 
 import type { TripsPageContent } from "../types/trips-content.types"
 import { TripCard } from "./trip-card"
 
 const PAGE_SIZE = 6
-
-/** Strips tashkeel and folds the alef/ya/ta-marbuta variants so search is forgiving. */
-function normalize(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[ً-ْـٰ]/g, "")
-    .replace(/[أإآٱ]/g, "ا")
-    .replace(/ى/g, "ي")
-    .replace(/ة/g, "ه")
-    .trim()
-}
 
 interface TripsSectionProps {
   content: TripsPageContent
@@ -33,14 +23,14 @@ export function TripsSection({ content }: TripsSectionProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const matchingTrips = useMemo(() => {
-    const term = normalize(query)
+    const term = normalizeArabicText(query)
 
     if (!term) {
       return content.trips
     }
 
     return content.trips.filter((trip) =>
-      normalize(`${trip.title} ${trip.destination}`).includes(term)
+      normalizeArabicText(`${trip.title} ${trip.destination}`).includes(term)
     )
   }, [content.trips, query])
 
