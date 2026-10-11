@@ -83,6 +83,8 @@ export function AuthTextField({
 interface AuthPasswordFieldProps {
   id: string
   content: PasswordFieldContent
+  icon?: LucideIcon
+  showVisibilityToggle?: boolean
   error?: string
   inputProps: Omit<ComponentProps<typeof Input>, "id" | "type">
 }
@@ -90,6 +92,8 @@ interface AuthPasswordFieldProps {
 export function AuthPasswordField({
   id,
   content,
+  icon: Icon = KeyRound,
+  showVisibilityToggle = true,
   error,
   inputProps,
 }: AuthPasswordFieldProps) {
@@ -106,29 +110,31 @@ export function AuthPasswordField({
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
           authInputClassName(Boolean(error)),
-          "pr-14 pl-14",
+          showVisibilityToggle ? "pr-14 pl-14" : "pr-14 pl-5",
           className
         )}
       />
-      <KeyRound
+      <Icon
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 right-4 size-6 -translate-y-1/2 text-brand"
         strokeWidth={1.8}
       />
-      <button
-        type="button"
-        onClick={() => setShowPassword((visible) => !visible)}
-        className="absolute top-1/2 left-4 grid size-8 -translate-y-1/2 place-items-center rounded-md text-neutral-500 transition-colors hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-        aria-label={
-          showPassword ? content.hidePasswordLabel : content.showPasswordLabel
-        }
-      >
-        {showPassword ? (
-          <EyeOff aria-hidden="true" className="size-5" />
-        ) : (
-          <Eye aria-hidden="true" className="size-5" />
-        )}
-      </button>
+      {showVisibilityToggle ? (
+        <button
+          type="button"
+          onClick={() => setShowPassword((visible) => !visible)}
+          className="absolute top-1/2 left-4 grid size-8 -translate-y-1/2 place-items-center rounded-md text-neutral-500 transition-colors hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          aria-label={
+            showPassword ? content.hidePasswordLabel : content.showPasswordLabel
+          }
+        >
+          {showPassword ? (
+            <EyeOff aria-hidden="true" className="size-5" />
+          ) : (
+            <Eye aria-hidden="true" className="size-5" />
+          )}
+        </button>
+      ) : null}
     </FormField>
   )
 }

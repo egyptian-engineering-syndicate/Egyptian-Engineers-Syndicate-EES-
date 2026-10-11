@@ -13,8 +13,8 @@ export const loginPageContent: LoginPageContent = {
     alt: "مهندسون وعمال داخل موقع إنشاء",
   },
   form: {
-    phoneLabel: "رقم الهاتف",
-    phonePlaceholder: "أضف رقم الهاتف",
+    phoneLabel: "رقم العضوية ",
+    phonePlaceholder: "أضف رقم العضوية",
     password: {
       label: "كلمة السر",
       placeholder: "أضف كلمة السر",
@@ -27,7 +27,7 @@ export const loginPageContent: LoginPageContent = {
     createAccountLabel: "إنشاء حساب",
     createAccountHref: "/register",
     validation: {
-      phoneRequired: "رقم الهاتف مطلوب",
+      phoneRequired: "رقم العضوية مطلوب",
       phoneInvalid: "أدخل رقم هاتف مصري صحيح",
       passwordRequired: "كلمة السر مطلوبة",
       passwordTooShort: "كلمة السر يجب ألا تقل عن 6 أحرف",

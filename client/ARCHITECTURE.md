@@ -1,5 +1,8 @@
 # Project architecture
 
+Visual conventions (tokens, page skeleton, card/form/button classes, RTL rules) live
+in `DESIGN-SYSTEM.md`. This file covers structure; that one covers what it looks like.
+
 This project uses Next.js App Router with feature-based organization. Application code stays in top-level folders because this repository already uses a root `app` directory.
 
 ## Dependency direction
@@ -60,9 +63,106 @@ features/
 |   |-- schemas/                    # Shared fields + page form schemas
 |   |-- types/                      # Auth content contracts
 |   `-- index.ts
-`-- site-shell/
-    |-- components/
-    |-- data/
+|-- home/
+|   |-- components/
+|   |-- data/
+|   |-- types/
+|   `-- index.ts
+|-- membership/
+|   |-- components/                 # Renewal + payment page views and cards
+|   |-- data/                       # Plans, member/demo-user, page content adapters
+|   |-- schemas/                    # Payment form schema
+|   |-- types/                      # Membership content contracts
+|   `-- index.ts
+|-- committees/
+|   |-- components/           # Committees listing/grid, committee card, details page + member card
+|   |-- data/                 # Committee listing + per-committee details content adapters
+|   |-- types/
+|   `-- index.ts
+|-- health-care/
+|   |-- components/           # Plan listing, plan card, rules/special-cases/documents cards,
+|   |                         # details/booking page + form + attached-documents card
+|   |-- data/                 # Plan listing + per-plan details content adapters
+|   |-- schemas/              # Booking form schema
+|   |-- types/
+|   `-- index.ts
+|-- profile/
+|   |-- components/           # Member card, booking card, booking-details cards,
+|   |                         # subscription data/documents cards + shared detail field
+|   |-- data/                 # Profile page + per-booking / per-subscription adapters
+|   |-- types/
+|   `-- index.ts
+|-- site-shell/
+|   |-- components/           # Header, footer, logo, nav + shared PageBreadcrumb
+|   |-- data/
+|   |-- types/
+|   `-- index.ts
+|-- training/
+|   |-- components/           # Courses listing/search/grid, course card, details page
+|   |                         # (overview + topics band) and subscription form
+|   |-- data/                 # Course listing + per-course details content adapters
+|   |-- schemas/              # Course subscription (payment) form schema
+|   |-- types/
+|   `-- index.ts
+`-- trips/
+    |-- components/           # Trips page view, promo banner, search/grid, trip card
+    |-- data/                 # Promo + trip listing content adapter
     |-- types/
     `-- index.ts
 ```
+
+`PageBreadcrumb` (the green pattern bar under the header) lives in `site-shell` because it is
+site chrome rather than any one feature's concern; `membership` and `trips` both consume it
+through `@/features/site-shell`.
+
+`membership`'s two routes (`/membership/renewal`, `/membership/renewal/payment`) live under `app/(member)/` — a separate route group from `app/(website)/` — so its layout can pass a mock signed-in user to `SiteShell` (the designs show a logged-in header). Route groups don't change the URL, so this is transparent to navigation. `trips` (`/trips`)
+sits in the same group for the same reason — its design also shows the signed-in header. `health-care` (`/health-care`, `/health-care/[planId]`), `committees` (`/committees`, `/committees/[committeeId]`), `profile` (`/profile`, `/profile/bookings/[bookingId]`, `/profile/subscriptions/[subscriptionId]`) and `training` (`/training`, `/training/[courseId]`) sit there too, for the same reason.
+
+`health-care`'s listing page is a stack of copy-only cards (general rules, special
+cases, required documents) above the two plan cards; each numbered line carries its
+own authored `marker` string rather than relying on `<ol>` numbering, and renders it
+inside a `dir="ltr"` span so bidi doesn't mirror the `1)` bracket in the RTL
+paragraph.
+
+`health-care`'s details/booking page (`/health-care/[planId]`) closely mirrors `trips`'s details/booking page (contact details + a member field-array + payment), reusing the shared `PaymentMethodSelector`, but the member section models a fixed "assigned engineer" plus a removable family-members array (relation + national ID) instead of trips's traveler array. It also carries an attached-documents card (checklist + file dropzone + notes + submit/back) between the family and payment cards; the picked `File` objects stay in that component's state rather than in the Zod schema, since nothing is uploaded until a booking endpoint exists.
+
+`PaymentMethodSelector` (`components/payment-method-selector.tsx`) is a shared, business-agnostic component — `membership`, `trips`, and `health-care` all offer the same three payment methods (card/fawry/paytabs), so it lives directly under `components/` rather than inside any one feature. It isn't a shadcn primitive, so it sits alongside `theme-provider.tsx` rather than in `components/ui/`.
+
+`components/surface-card.tsx` is the same story again: `SurfaceCard` (and the
+`surfaceCardClassName` behind it) is the white, soft-shadowed content card the
+designs stack down every inner page — hoisted once `trips` and `health-care` were
+carrying a byte-identical `bookingCardClassName`.
+
+`components/form-field.tsx` is the same story for the labeled-field wrapper (label + inline error + relative-positioned slot for an input/icon) all three features' forms use, plus its `fieldInputClassName`/`fieldIconClassName` styling helpers — hoisted after `trips` and `health-care` had copied it byte-for-byte from `membership`.
+
+`profile` (`/profile`, `/profile/bookings/[bookingId]`,
+`/profile/subscriptions/[subscriptionId]`) is read-only: it renders stored member data,
+so it has no `schemas/` and no form. Its `ProfileDetailField` is the label + value pair
+that replaces `FormField` on these pages. The listing page's booking cards deliberately
+duplicate `trips`'s `TripCard` shape rather than importing it — `TripCard` is a `trips`
+internal, and the booking card drops the perk pills and swaps the CTA. The two "cancel"
+buttons on the booking-details page are visual only until a cancellation endpoint exists,
+which is what keeps that whole route a Server Component.
+
+`SiteShellUser` now carries a `profileHref`, so the header's signed-in chip (desktop and
+mobile) links to the profile — otherwise nothing in the chrome reaches these routes.
+
+`committees` has no form, so it carries no `schemas/`. Its details page is the one layout in
+the app that is not a stack of cards: a full-bleed grey band holds the committee brief while
+the photo beside it spans two grid rows so it overhangs into the first row of member cards.
+That overhang is why `CommitteeDetailsPageView` sets `overflow-x-clip` on `<main>` — the band
+bleeds past both viewport edges and would otherwise add a horizontal scrollbar in RTL.
+
+`training` (`/training`, `/training/[courseId]`) is the listing/details pair again, but the
+details route is not a stack of cards: an overview band (copy beside a photo in a green
+offset frame), then a grey pattern band of course topics, then the subscription card sitting
+over a green band. Only the subscription card is a form — the payment fields alone — so the
+feature's `schemas/` holds just that one schema, and everything above it stays a Server
+Component. `getCourseDetailsPageContent(courseId)` composes the details content from the
+listing entry (title, price, image) plus the per-course copy in the same adapter, so a course
+is authored once; an unknown id falls back to the first course until the Directus queries land.
+
+`lib/arabic-text.ts` holds `normalizeArabicText` — the tashkeel/alef/ya folding both search
+boxes (`trips`, `training`) run over the query and the searched fields. It's business-agnostic,
+so it belongs in `lib` rather than in either feature; it was hoisted out of `TripsSection` when
+`TrainingCoursesSection` needed the identical helper.

@@ -2,9 +2,12 @@
 
 import { useMemo } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Phone } from "lucide-react"
 import { useForm } from "react-hook-form"
+
+import { signInMember } from "@/lib/member-session"
 
 import {
   createLoginSchema,
@@ -22,6 +25,7 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ content }: LoginFormProps) {
+  const router = useRouter()
   const schema = useMemo(
     () => createLoginSchema(content.validation),
     [content.validation]
@@ -38,8 +42,9 @@ export function LoginForm({ content }: LoginFormProps) {
     },
   })
 
-  async function onSubmit() {
-    await Promise.resolve()
+  function onSubmit() {
+    signInMember()
+    router.replace("/")
   }
 
   return (

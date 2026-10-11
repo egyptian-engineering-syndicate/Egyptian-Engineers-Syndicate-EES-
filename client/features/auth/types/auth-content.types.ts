@@ -65,3 +65,34 @@ export interface RegisterPageContent extends AuthPageContent {
     validation: RegisterValidationMessages
   }
 }
+
+export type RegistrationConfirmationView = "account" | "phone" | "password"
+
+export interface OtpConfirmationContent {
+  kind: "otp"
+  title: string
+  description: string
+  phoneNumber: string
+  digitLabels: [string, string, string, string]
+  confirmLabel: string
+}
+
+export interface NewPasswordConfirmationContent {
+  kind: "password"
+  title: string
+  description: string
+  newPassword: PasswordFieldContent
+  confirmPassword: PasswordFieldContent
+  saveLabel: string
+}
+
+export interface RegistrationConfirmationPageContent extends Pick<
+  AuthPageContent,
+  "breadcrumbs" | "image"
+> {
+  variants: {
+    account: OtpConfirmationContent
+    phone: OtpConfirmationContent
+    password: NewPasswordConfirmationContent
+  }
+}
