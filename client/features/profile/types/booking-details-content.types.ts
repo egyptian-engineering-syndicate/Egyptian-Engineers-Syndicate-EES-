@@ -41,11 +41,29 @@ export interface BookingTravelersContent {
   travelers: BookingTraveler[]
 }
 
+export interface BookingCancelDialogContent {
+  title: string
+  feeLabel: string
+  description: string
+  bankAccountLabel: string
+  bankAccountPlaceholder: string
+  bankNameLabel: string
+  bankNamePlaceholder: string
+  backLabel: string
+  confirmCancelLabel: string
+  closeLabel: string
+  validation: {
+    bankAccountRequired: string
+    bankNameRequired: string
+  }
+}
+
 export interface BookingCancellationContent {
   title: string
   description: string
   cancelBookingLabel: string
   feeLabel: string
+  dialog: BookingCancelDialogContent
 }
 
 export interface BookingDetailsPageContent {

@@ -14,6 +14,7 @@ export type {
   ProfileSubscriptionLink,
 } from "./types/profile-content.types"
 export type {
+  BookingCancelDialogContent,
   BookingCancellationContent,
   BookingContactContent,
   BookingDetailsPageContent,

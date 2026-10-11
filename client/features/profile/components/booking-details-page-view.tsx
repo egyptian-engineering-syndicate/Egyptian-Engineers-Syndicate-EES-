@@ -20,7 +20,10 @@ export function BookingDetailsPageView({
       <div className="mx-auto w-full max-w-[1640px] space-y-6 px-5 py-10 sm:space-y-8 sm:px-8 sm:py-12 lg:px-14">
         <BookingSummaryCard summary={content.summary} />
         <BookingContactCard content={content.contact} />
-        <BookingTravelersCard content={content.travelers} />
+        <BookingTravelersCard
+          content={content.travelers}
+          cancelDialog={content.cancellation.dialog}
+        />
         <BookingCancellationCard content={content.cancellation} />
       </div>
     </main>

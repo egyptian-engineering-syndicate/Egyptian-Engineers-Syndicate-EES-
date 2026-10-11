@@ -1,7 +1,12 @@
+"use client"
+
+import { useState } from "react"
+
 import { SurfaceCard } from "@/components/surface-card"
 import { Button } from "@/components/ui/button"
 
 import type { BookingCancellationContent } from "../types/booking-details-content.types"
+import { BookingCancelDialog } from "./booking-cancel-dialog"
 
 interface BookingCancellationCardProps {
   content: BookingCancellationContent
@@ -10,6 +15,8 @@ interface BookingCancellationCardProps {
 export function BookingCancellationCard({
   content,
 }: BookingCancellationCardProps) {
+  const [cancelOpen, setCancelOpen] = useState(false)
+
   return (
     <SurfaceCard>
       <h2 className="text-lg font-extrabold text-neutral-950 sm:text-xl">
@@ -21,10 +28,10 @@ export function BookingCancellationCard({
       </p>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        {/* Visual only until the booking-cancellation endpoint exists. */}
         <Button
           type="button"
           variant="outline"
+          onClick={() => setCancelOpen(true)}
           className="h-14 min-w-44 rounded-md border-red-500/60 bg-white px-8 text-base font-semibold text-red-600 hover:bg-red-50 hover:text-red-700"
         >
           {content.cancelBookingLabel}
@@ -34,6 +41,12 @@ export function BookingCancellationCard({
           {content.feeLabel}
         </p>
       </div>
+
+      <BookingCancelDialog
+        open={cancelOpen}
+        onClose={() => setCancelOpen(false)}
+        content={content.dialog}
+      />
     </SurfaceCard>
   )
 }

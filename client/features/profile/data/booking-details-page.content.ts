@@ -52,6 +52,23 @@ const bookingDetailsPageContent: BookingDetailsPageContent = {
       "النظر إلى سوق العقارات النابض بالحياة والفرص العديدة في هذا القطاع في مصر ومنطقة الخليج يدفعنا لاغتنام الفرصة تأمين خطة توسع ملحوظة لأنفسنا في مجال العقارات",
     cancelBookingLabel: "الغاء الرحلة",
     feeLabel: "رسوم الإلغاء: 3000 جنية",
+    dialog: {
+      title: "الغاء الحجز",
+      feeLabel: "رسوم الإلغاء: 3000 جنية للفرد",
+      description:
+        "سيتم خصم المبلغ الملحق عن تذكرة الحجز واسترداد ما تبقى من التكلفة",
+      bankAccountLabel: "رقم الحساب البنكي",
+      bankAccountPlaceholder: "رقم الحساب البنكي",
+      bankNameLabel: "اسم البنك",
+      bankNamePlaceholder: "اسم البنك",
+      backLabel: "الرجوع",
+      confirmCancelLabel: "الغاء الرحلة",
+      closeLabel: "إغلاق",
+      validation: {
+        bankAccountRequired: "رقم الحساب البنكي مطلوب",
+        bankNameRequired: "اسم البنك مطلوب",
+      },
+    },
   },
 }
 
