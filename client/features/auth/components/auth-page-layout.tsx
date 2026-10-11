@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { ChevronLeft, House } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
@@ -36,7 +37,12 @@ export function AuthPageLayout({
                   className="size-5"
                   strokeWidth={1.8}
                 />
-                <span>{content.breadcrumbs.home}</span>
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-white/80"
+                >
+                  {content.breadcrumbs.home}
+                </Link>
               </li>
               <li aria-hidden="true">
                 <ChevronLeft className="size-5" />
@@ -59,6 +65,7 @@ export function AuthPageLayout({
             alt={content.image.alt}
             fill
             priority
+            loading="eager"
             sizes="(min-width: 1024px) 41.75vw, 100vw"
             className={cn("object-cover object-center", imageClassName)}
           />

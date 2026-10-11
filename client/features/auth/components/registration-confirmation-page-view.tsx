@@ -36,9 +36,16 @@ export function RegistrationConfirmationPageView({
       showImageOverlay={false}
     >
       {variant.kind === "otp" ? (
-        <OtpConfirmationPanel content={variant} />
+        <OtpConfirmationPanel
+          content={variant}
+          nextHref={
+            view === "account"
+              ? "/register/confirmation?view=phone"
+              : "/register/confirmation?view=password"
+          }
+        />
       ) : (
-        <NewPasswordConfirmationPanel content={variant} />
+        <NewPasswordConfirmationPanel content={variant} nextHref="/login" />
       )}
     </AuthPageLayout>
   )

@@ -11,6 +11,7 @@ import type {
   SiteShellContent,
   SiteShellUser,
 } from "../types/site-shell.types"
+import { scrollToPageHash } from "./hash-scroll"
 
 interface MobileNavigationProps {
   items: NavigationItem[]
@@ -46,7 +47,10 @@ export function MobileNavigation({
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false)
+                      scrollToPageHash(item.href, 120)
+                    }}
                     className="block rounded-md px-3 py-3 text-sm font-medium text-neutral-700 hover:bg-brand/5 hover:text-brand"
                   >
                     {item.label}

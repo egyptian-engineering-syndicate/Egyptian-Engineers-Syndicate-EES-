@@ -32,7 +32,7 @@ export function PaymentPageView({ content, plan }: PaymentPageViewProps) {
               </p>
 
               <div className="mt-6">
-                <PaymentForm content={content} />
+                <PaymentForm content={content} plan={plan} />
               </div>
             </CardContent>
           </Card>

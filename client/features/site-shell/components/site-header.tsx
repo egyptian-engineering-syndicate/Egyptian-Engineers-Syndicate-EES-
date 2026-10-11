@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -11,8 +12,11 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { isMemberSignedIn } from "@/lib/member-session"
 
+import { signedInUser } from "../data/site-shell.content"
 import type { SiteShellContent, SiteShellUser } from "../types/site-shell.types"
+import { scrollToPageHash } from "./hash-scroll"
 import { HeaderClock } from "./header-clock"
 import { MobileNavigation } from "./mobile-navigation"
 import { SiteLogo } from "./site-logo"
@@ -24,6 +28,11 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ content, user }: SiteHeaderProps) {
   const pathname = usePathname()
+  const [activeUser, setActiveUser] = useState<SiteShellUser | undefined>(user)
+
+  useEffect(() => {
+    setActiveUser(user ?? (isMemberSignedIn() ? signedInUser : undefined))
+  }, [user, pathname])
 
   return (
     <header className="ees-light-pattern relative z-40 bg-white">
@@ -71,16 +80,18 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
           >
             <ul className="flex items-center justify-center gap-2 2xl:gap-4">
               {content.navigation.map((item) => {
+                const path = item.href.split("#")[0] || "/"
                 const isActive =
-                  item.href === "/"
-                    ? pathname === item.href
-                    : pathname.startsWith(item.href)
+                  path === "/"
+                    ? pathname === "/" && !item.href.includes("#")
+                    : pathname.startsWith(path)
 
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
+                      onClick={() => scrollToPageHash(item.href)}
                       className={`flex h-14 items-center gap-1.5 rounded-md px-3 text-sm font-medium whitespace-nowrap transition-colors xl:px-4 xl:text-base ${
                         isActive
                           ? "bg-[#eaf5f1] font-bold text-brand"
@@ -98,9 +109,10 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
             </ul>
           </nav>
 
-          {user ? (
+          {activeUser ? (
             <Link
-              href={user.profileHref}
+              href={activeUser.profileHref}
+              aria-label="الملف الشخصي"
               className="hidden min-w-44 items-center gap-3 rounded-md transition-colors hover:bg-brand/5 2xl:flex"
             >
               <div className="grid size-14 place-items-center rounded-md bg-[#edf8f4] text-brand">
@@ -111,8 +123,10 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
                 />
               </div>
               <div className="text-sm leading-6">
-                <p className="text-neutral-500">{user.greeting}</p>
-                <p className="font-semibold text-neutral-800">{user.name}</p>
+                <p className="text-neutral-500">{activeUser.greeting}</p>
+                <p className="font-semibold text-neutral-800">
+                  {activeUser.name}
+                </p>
               </div>
             </Link>
           ) : (
@@ -127,7 +141,7 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
           <MobileNavigation
             items={content.navigation}
             login={content.login}
-            user={user}
+            user={activeUser}
           />
         </div>
       </div>

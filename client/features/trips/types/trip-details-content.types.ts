@@ -38,7 +38,7 @@ export interface TravelerTitleOption {
 
 export interface TravelersContent {
   title: string
-  /** Prefixes the traveler index, e.g. "المسافر" + " 1". */
+  /** Prefixes the traveler index, e.g. "المستخدم" + " 1". */
   travelerLabel: string
   titleLabel: string
   titleOptions: TravelerTitleOption[]

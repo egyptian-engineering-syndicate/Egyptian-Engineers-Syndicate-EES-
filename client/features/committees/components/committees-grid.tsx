@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import type { CommitteesPageContent } from "../types/committees-content.types"
 import { CommitteeCard } from "./committee-card"
 
-const PAGE_SIZE = 12
+const PAGE_SIZE = 6
 
 interface CommitteesGridProps {
   content: CommitteesPageContent

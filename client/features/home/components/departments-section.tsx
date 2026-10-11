@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
@@ -23,43 +24,46 @@ export function DepartmentsSection({ content }: DepartmentsSectionProps) {
             {content.description}
           </p>
           <Button
-            type="button"
+            asChild
             className="mt-8 h-14 rounded-md bg-white px-9 text-base font-semibold text-neutral-600 hover:bg-white/90"
           >
-            {content.learnMore}
+            <Link href="/departments">{content.learnMore}</Link>
           </Button>
         </div>
 
         <div className="order-2">
           <div className="grid gap-7 md:grid-cols-2 lg:gap-10">
             {content.items.map((department) => (
-              <article
+              <Link
                 key={department.title}
-                className="overflow-hidden rounded-md bg-white shadow-[0_14px_35px_rgba(0,0,0,.1)]"
+                href={department.href}
+                className="overflow-hidden rounded-md bg-white shadow-[0_14px_35px_rgba(0,0,0,.1)] transition-shadow hover:shadow-[0_16px_36px_rgba(0,0,0,.12)]"
               >
-                <div className="relative aspect-[1.7/1] overflow-hidden">
-                  <Image
-                    src="/images/login-construction.jpg"
-                    alt={department.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 90vw, 35vw"
-                    className="object-cover"
-                    style={{ objectPosition: department.imagePosition }}
-                  />
-                  <div className="absolute inset-0 bg-brand/10" />
-                </div>
-                <div className="px-6 py-6 sm:px-8">
-                  <h3 className="text-2xl leading-tight font-extrabold text-neutral-950">
-                    {department.title}
-                  </h3>
-                  <p className="mt-4 line-clamp-4 text-sm leading-7 text-neutral-600 sm:text-base sm:leading-8">
-                    {department.description}
-                  </p>
-                  <p className="mt-5 border-t border-neutral-200 pt-4 text-sm text-neutral-500">
-                    {content.learnMore}
-                  </p>
-                </div>
-              </article>
+                <article>
+                  <div className="relative aspect-[1.7/1] overflow-hidden">
+                    <Image
+                      src="/images/login-construction.jpg"
+                      alt={department.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 90vw, 35vw"
+                      className="object-cover"
+                      style={{ objectPosition: department.imagePosition }}
+                    />
+                    <div className="absolute inset-0 bg-brand/10" />
+                  </div>
+                  <div className="px-6 py-6 sm:px-8">
+                    <h3 className="text-2xl leading-tight font-extrabold text-neutral-950">
+                      {department.title}
+                    </h3>
+                    <p className="mt-4 line-clamp-4 text-sm leading-7 text-neutral-600 sm:text-base sm:leading-8">
+                      {department.description}
+                    </p>
+                    <p className="mt-5 border-t border-neutral-200 pt-4 text-sm text-neutral-500">
+                      {content.learnMore}
+                    </p>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
           <div className="mt-10">

@@ -4,7 +4,7 @@
  * every listing page with a search box needs the exact same folding.
  */
 export function normalizeArabicText(value: string) {
-  return value
+  return (value ?? "")
     .toLowerCase()
     .replace(/[ً-ْـٰ]/g, "")
     .replace(/[أإآٱ]/g, "ا")

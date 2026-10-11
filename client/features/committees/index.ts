@@ -4,6 +4,8 @@ export { committeesPageContent } from "./data/committees-page.content"
 export { getCommitteeDetailsPageContent } from "./data/committee-details-page.content"
 export type {
   Committee,
+  CommitteeActivity,
+  CommitteeChair,
   CommitteeImage,
   CommitteeMember,
   CommitteesPageContent,

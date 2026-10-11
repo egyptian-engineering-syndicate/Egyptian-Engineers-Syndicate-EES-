@@ -11,6 +11,7 @@ export interface HomeService {
   description: string
   details: string[]
   icon: HomeIconName
+  href?: string
 }
 
 export interface DepartmentCardContent {
@@ -18,6 +19,7 @@ export interface DepartmentCardContent {
   description: string
   imageAlt: string
   imagePosition: string
+  href: string
 }
 
 export interface NewsCardContent {

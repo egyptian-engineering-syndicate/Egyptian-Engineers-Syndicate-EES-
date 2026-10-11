@@ -1,4 +1,10 @@
-import type { SiteShellContent } from "../types/site-shell.types"
+import type { SiteShellContent, SiteShellUser } from "../types/site-shell.types"
+
+export const signedInUser: SiteShellUser = {
+  greeting: "مرحبا 👋",
+  name: "م.محمد عمرو",
+  profileHref: "/profile",
+}
 
 export const siteShellContent: SiteShellContent = {
   brand: {
@@ -10,11 +16,13 @@ export const siteShellContent: SiteShellContent = {
   navigation: [
     { label: "الرئيسية", href: "/" },
     { label: "من نحن", href: "/about" },
-    { label: "الخدمات", href: "/services", hasMenu: true },
-    { label: "إدارات النقابة", href: "/departments", hasMenu: true },
+    { label: "الخدمات", href: "/services" },
+    { label: "إدارة الخدمات النقابية", href: "/departments/syndicate-services" },
+    { label: "الأندية", href: "/clubs" },
     { label: "اللجان", href: "/committees" },
     { label: "آخر الأخبار", href: "/news" },
     { label: "الفعاليات", href: "/events" },
+    { label: "المنشورات", href: "/publications" },
     { label: "تواصل معنا", href: "/contact" },
   ],
   login: {

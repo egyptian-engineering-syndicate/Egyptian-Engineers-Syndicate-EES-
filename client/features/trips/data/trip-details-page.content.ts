@@ -36,8 +36,8 @@ const tripDetailsPageContent: TripDetailsPageContent = {
     emailPlaceholder: "البريد الالكتروني",
   },
   travelers: {
-    title: "تفاصيل المسافرين",
-    travelerLabel: "المسافر",
+    title: "تفاصيل المستخدمين",
+    travelerLabel: "المستخدم",
     titleLabel: "اللقب",
     titleOptions: [
       { value: "mr", label: "السيد" },
@@ -49,7 +49,7 @@ const tripDetailsPageContent: TripDetailsPageContent = {
     fatherNamePlaceholder: "اسم الاب",
     familyNameLabel: "اسم العائلة",
     familyNamePlaceholder: "اسم العائلة",
-    addTravelerLabel: "اضافة مسافر اخر",
+    addTravelerLabel: "اضافة مستخدم اخر",
     removeTravelerLabel: "حذف",
     initialCount: 2,
   },

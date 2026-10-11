@@ -32,7 +32,7 @@ export interface BookingTraveler {
 
 export interface BookingTravelersContent {
   title: string
-  /** Prefixes the traveler index, e.g. "المسافر" + " 1". */
+  /** Prefixes the traveler index, e.g. "المستخدم" + " 1". */
   travelerLabel: string
   firstNameLabel: string
   fatherNameLabel: string

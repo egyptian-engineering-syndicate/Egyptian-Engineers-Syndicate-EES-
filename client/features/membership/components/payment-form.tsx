@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   CalendarDays,
@@ -18,18 +19,27 @@ import {
 import { PaymentMethodSelector } from "@/components/payment-method-selector"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  paymentSuccessPath,
+  recordMemberPayment,
+} from "@/lib/member-activity"
 
 import {
   createPaymentSchema,
   type PaymentFormValues,
 } from "../schemas/payment.schema"
-import type { PaymentPageContent } from "../types/membership-content.types"
+import type {
+  PaymentPageContent,
+  SubscriptionPlan,
+} from "../types/membership-content.types"
 
 interface PaymentFormProps {
   content: PaymentPageContent
+  plan: SubscriptionPlan
 }
 
-export function PaymentForm({ content }: PaymentFormProps) {
+export function PaymentForm({ content, plan }: PaymentFormProps) {
+  const router = useRouter()
   const schema = useMemo(
     () => createPaymentSchema(content.form.validation),
     [content.form.validation]
@@ -53,7 +63,12 @@ export function PaymentForm({ content }: PaymentFormProps) {
   const method = useWatch({ control, name: "method" })
 
   async function onSubmit() {
-    await Promise.resolve()
+    recordMemberPayment({
+      category: "membership",
+      title: plan.title,
+      price: plan.price,
+    })
+    router.push(paymentSuccessPath)
   }
 
   return (

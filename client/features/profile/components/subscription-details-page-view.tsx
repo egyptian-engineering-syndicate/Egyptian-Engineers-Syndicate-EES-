@@ -16,8 +16,9 @@ export function SubscriptionDetailsPageView({
       <PageBreadcrumb items={content.breadcrumbs} />
 
       <div className="mx-auto w-full max-w-[1640px] space-y-6 px-5 py-10 sm:space-y-8 sm:px-8 sm:py-12 lg:px-14">
-        {/* The design opens straight on the cards; the page still needs a heading. */}
-        <h1 className="sr-only">{content.title}</h1>
+        <h1 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl">
+          {content.title}
+        </h1>
 
         <SubscriptionSectionCard section={content.personal} />
         <SubscriptionSectionCard section={content.professional} />

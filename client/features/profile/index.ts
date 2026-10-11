@@ -6,6 +6,8 @@ export { getBookingDetailsPageContent } from "./data/booking-details-page.conten
 export { getSubscriptionDetailsPageContent } from "./data/subscription-details-page.content"
 export type {
   ProfileBooking,
+  ProfileBookingTab,
+  ProfileEditFormContent,
   ProfileImage,
   ProfileMemberSummary,
   ProfilePageContent,

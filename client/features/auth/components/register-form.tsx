@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CircleUserRound, CreditCard, Hash, Phone } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -21,6 +22,7 @@ interface RegisterFormProps {
 }
 
 export function RegisterForm({ content }: RegisterFormProps) {
+  const router = useRouter()
   const schema = useMemo(
     () => createRegisterSchema(content.validation),
     [content.validation]
@@ -40,8 +42,8 @@ export function RegisterForm({ content }: RegisterFormProps) {
     },
   })
 
-  async function onSubmit() {
-    await Promise.resolve()
+  function onSubmit() {
+    router.replace("/register/confirmation")
   }
 
   return (

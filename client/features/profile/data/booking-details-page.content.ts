@@ -35,8 +35,8 @@ const bookingDetailsPageContent: BookingDetailsPageContent = {
     phone: "01069407053",
   },
   travelers: {
-    title: "تفاصيل المسافرين",
-    travelerLabel: "المسافر",
+    title: "تفاصيل المستخدمين",
+    travelerLabel: "المستخدم",
     firstNameLabel: "الاسم الاول",
     fatherNameLabel: "اسم الاب",
     familyNameLabel: "اسم العائلة",

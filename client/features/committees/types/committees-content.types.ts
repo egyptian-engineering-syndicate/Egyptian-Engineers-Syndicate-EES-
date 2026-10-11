@@ -10,7 +10,6 @@ export interface Committee {
   title: string
   description: string
   detailsHref: string
-  image: CommitteeImage
 }
 
 export interface CommitteesPageContent {
@@ -28,12 +27,29 @@ export interface CommitteeMember {
   image: CommitteeImage
 }
 
+export interface CommitteeChair {
+  orgTitle: string
+  name: string
+  bio: string
+  image: CommitteeImage
+}
+
+export interface CommitteeActivity {
+  id: string
+  title: string
+  description: string
+}
+
 export interface CommitteeDetailsPageContent {
   breadcrumbs: BreadcrumbItem[]
   title: string
-  /** Body copy of the committee brief, one entry per rendered paragraph. */
   paragraphs: string[]
   image: CommitteeImage
+  chairTitle: string
+  chair: CommitteeChair
   membersTitle: string
   members: CommitteeMember[]
+  activitiesTitle: string
+  activitiesImage: CommitteeImage
+  activities: CommitteeActivity[]
 }

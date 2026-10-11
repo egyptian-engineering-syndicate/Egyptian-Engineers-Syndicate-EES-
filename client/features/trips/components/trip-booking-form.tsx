@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   CalendarDays,
@@ -24,6 +25,10 @@ import { SurfaceCard } from "@/components/surface-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  paymentSuccessPath,
+  recordMemberPayment,
+} from "@/lib/member-activity"
 import { cn } from "@/lib/utils"
 
 import {
@@ -50,6 +55,7 @@ interface TripBookingFormProps {
 }
 
 export function TripBookingForm({ content }: TripBookingFormProps) {
+  const router = useRouter()
   const { cancellationPolicy, contact, travelers, payment, validation } =
     content
 
@@ -83,7 +89,13 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
   const method = useWatch({ control, name: "method" })
 
   async function onSubmit() {
-    await Promise.resolve()
+    recordMemberPayment({
+      category: "trip",
+      title: content.summary.title,
+      price: payment.totalPrice,
+      image: content.summary.image,
+    })
+    router.push(paymentSuccessPath)
   }
 
   return (

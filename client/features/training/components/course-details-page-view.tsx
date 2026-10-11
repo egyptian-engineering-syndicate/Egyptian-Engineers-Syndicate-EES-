@@ -26,7 +26,10 @@ export function CourseDetailsPageView({ content }: CourseDetailsPageViewProps) {
         />
 
         <div className="relative mx-auto w-full max-w-[1640px] px-5 py-12 sm:px-8 sm:py-14 lg:px-14">
-          <CourseSubscriptionForm content={content.subscription} />
+          <CourseSubscriptionForm
+            content={content.subscription}
+            activityTitle={content.overview.title}
+          />
         </div>
       </section>
     </main>

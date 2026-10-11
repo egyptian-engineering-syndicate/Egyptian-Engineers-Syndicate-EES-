@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Image from "next/image"
 import { CalendarDays } from "lucide-react"
 
@@ -23,11 +24,11 @@ export function NewsSection({ content }: NewsSectionProps) {
             className="max-w-5xl"
           />
           <Button
-            type="button"
+            asChild
             variant="outline"
             className="h-13 w-fit rounded-md border-neutral-300 bg-white px-8 text-base font-medium text-neutral-600 hover:bg-neutral-50"
           >
-            {content.viewMore}
+            <Link href="/news">{content.viewMore}</Link>
           </Button>
         </div>
 

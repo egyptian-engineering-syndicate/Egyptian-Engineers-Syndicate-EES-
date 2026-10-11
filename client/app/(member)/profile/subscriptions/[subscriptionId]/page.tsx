@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   return {
     title: `${title} | ${siteShellContent.brand.name}`,
-    description: "البيانات الشخصية والمهنية والمستندات المرفقة بالاشتراك.",
+    description: title,
   }
 }
 

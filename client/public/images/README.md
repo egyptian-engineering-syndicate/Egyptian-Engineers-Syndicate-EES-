@@ -27,6 +27,23 @@ are wired up. All CC0, via Wikimedia Commons' Unsplash imports:
 - `committees/member-1.jpg`: "Elegant man in the autumn (Unsplash)" by Joshua Reddekopp, CC0 — https://commons.wikimedia.org/wiki/File:Elegant_man_in_the_autumn_(Unsplash).jpg
 - `committees/member-2.jpg`: "Man with a white beard and glasses, by Angelina Litvin, 2015-10-05 (Unsplash)" by Angelina Litvin, CC0 — https://commons.wikimedia.org/wiki/File:Man_with_a_white_beard_and_glasses,_by_Angelina_Litvin,_2015-10-05_(Unsplash).jpg
 
+## `about/` — syndicate board
+
+Board portraits under `about/board/` were supplied for the About page
+(`features/about`). `about/intro.jpg` and `about/goals.jpg` temporarily reuse
+`committees/committee-building.jpg` until Directus assets replace them.
+
+## `clubs/` — placeholders
+
+Temporary stand-ins for club photos in `features/clubs`. They currently reuse
+existing trip/construction images until Directus assets replace them:
+
+- `clubs/volleyball.jpg` ← `trips/hurghada.jpg`
+- `clubs/golf-carts.jpg` ← `trips/luxor.jpg`
+- `clubs/golf.jpg` ← `trips/dubai.jpg`
+- `clubs/tennis.jpg` ← `trips/istanbul-galata.jpg`
+- `clubs/cultural.jpg` ← `login-construction.jpg`
+
 ## Training courses — placeholder
 
 The training feature has no photos of its own yet: every course in

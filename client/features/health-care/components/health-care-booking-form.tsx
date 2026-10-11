@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   CalendarDays,
@@ -24,6 +25,10 @@ import { SurfaceCard } from "@/components/surface-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  paymentSuccessPath,
+  recordMemberPayment,
+} from "@/lib/member-activity"
 import { cn } from "@/lib/utils"
 
 import {
@@ -62,6 +67,7 @@ interface HealthCareBookingFormProps {
 }
 
 export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
+  const router = useRouter()
   const {
     contact,
     assignedEngineer,
@@ -106,7 +112,12 @@ export function HealthCareBookingForm({ content }: HealthCareBookingFormProps) {
   const method = useWatch({ control, name: "method" })
 
   async function onSubmit() {
-    await Promise.resolve()
+    recordMemberPayment({
+      category: "health-care",
+      title: content.summary.title,
+      price: payment.totalPrice,
+    })
+    router.push(paymentSuccessPath)
   }
 
   return (

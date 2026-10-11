@@ -1,3 +1,7 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
@@ -6,9 +10,15 @@ import type { OtpConfirmationContent } from "../types/auth-content.types"
 
 interface OtpConfirmationPanelProps {
   content: OtpConfirmationContent
+  nextHref: string
 }
 
-export function OtpConfirmationPanel({ content }: OtpConfirmationPanelProps) {
+export function OtpConfirmationPanel({
+  content,
+  nextHref,
+}: OtpConfirmationPanelProps) {
+  const router = useRouter()
+
   return (
     <div className="mt-5">
       <fieldset>
@@ -41,6 +51,7 @@ export function OtpConfirmationPanel({ content }: OtpConfirmationPanelProps) {
 
       <Button
         type="button"
+        onClick={() => router.replace(nextHref)}
         className="mt-5 h-[60px] min-w-[174px] rounded-md bg-brand px-8 text-base font-medium text-white hover:bg-brand-strong"
       >
         {content.confirmLabel}
