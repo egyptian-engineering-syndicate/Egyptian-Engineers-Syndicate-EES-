@@ -38,7 +38,7 @@ export function ContactSection({ content }: ContactSectionProps) {
       label: content.phoneLabel,
       value: content.phone,
       icon: Phone,
-      direction: "ltr" as const,
+      direction: "rtl" as const,
     },
     {
       label: content.emailLabel,

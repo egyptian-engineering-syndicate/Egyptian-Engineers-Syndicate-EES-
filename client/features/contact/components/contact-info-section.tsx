@@ -47,7 +47,7 @@ export function ContactInfoSection({
                 <p className="text-xs text-neutral-500">{item.label}</p>
                 <p
                   className="mt-0.5 text-sm font-medium text-neutral-900"
-                  dir={item.type === "address" ? "rtl" : "ltr"}
+                  dir={item.type === "email" ? "ltr" : "rtl"}
                 >
                   {item.value}
                 </p>

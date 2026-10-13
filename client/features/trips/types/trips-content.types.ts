@@ -5,8 +5,16 @@ export interface TripImage {
   alt: string
 }
 
+export type TripCategory = "umrah" | "domestic" | "international"
+
+export interface TripFilter {
+  id: TripCategory | "all"
+  label: string
+}
+
 export interface Trip {
   id: string
+  category: TripCategory
   title: string
   /** Short perks shown as pills, e.g. flight tickets, hotel rating, transfers. */
   features: string[]
@@ -34,6 +42,8 @@ export interface TripsPageContent {
   description: string
   searchLabel: string
   searchPlaceholder: string
+  filtersLabel: string
+  filters: TripFilter[]
   noResultsMessage: string
   loadMoreLabel: string
   bookLabel: string

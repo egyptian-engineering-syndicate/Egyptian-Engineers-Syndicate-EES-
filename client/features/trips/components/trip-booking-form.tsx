@@ -92,7 +92,7 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
     recordMemberPayment({
       category: "trip",
       title: content.summary.title,
-      price: payment.totalPrice,
+      price: payment.totalPrice ?? 0,
       image: content.summary.image,
     })
     router.push(paymentSuccessPath)
@@ -122,6 +122,7 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
                 id="phone"
                 type="tel"
                 inputMode="tel"
+                dir="rtl"
                 placeholder={contact.phonePlaceholder}
                 className={fieldInputClassName(Boolean(errors.phone))}
                 {...register("phone")}
@@ -275,17 +276,19 @@ export function TripBookingForm({ content }: TripBookingFormProps) {
         </h2>
         <p className="mt-1 text-sm text-neutral-500">{payment.subtitle}</p>
 
-        <div className="mt-5 flex items-center justify-between gap-4 rounded-md bg-[#edf8f4] px-5 py-4">
-          <span className="text-sm font-bold text-neutral-950 sm:text-base">
-            {payment.totalLabel}
-          </span>
-          <span className="text-lg font-extrabold text-brand sm:text-xl">
-            {payment.totalPrice}
-            <span className="ms-1.5 text-sm font-medium text-neutral-500">
-              {payment.currency}
+        {payment.totalPrice != null ? (
+          <div className="mt-5 flex items-center justify-between gap-4 rounded-md bg-[#edf8f4] px-5 py-4">
+            <span className="text-sm font-bold text-neutral-950 sm:text-base">
+              {payment.totalLabel}
             </span>
-          </span>
-        </div>
+            <span className="text-lg font-extrabold text-brand sm:text-xl">
+              {payment.totalPrice}
+              <span className="ms-1.5 text-sm font-medium text-neutral-500">
+                {payment.currency}
+              </span>
+            </span>
+          </div>
+        ) : null}
 
         <fieldset className="mt-6 lg:max-w-155">
           <legend className="sr-only">{payment.methodsLabel}</legend>

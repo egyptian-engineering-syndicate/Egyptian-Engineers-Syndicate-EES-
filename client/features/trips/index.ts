@@ -4,6 +4,8 @@ export { tripsPageContent } from "./data/trips-page.content"
 export { getTripDetailsPageContent } from "./data/trip-details-page.content"
 export type {
   Trip,
+  TripCategory,
+  TripFilter,
   TripImage,
   TripsPageContent,
   TripsPromoContent,

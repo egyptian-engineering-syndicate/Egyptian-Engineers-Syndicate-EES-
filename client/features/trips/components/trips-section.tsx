@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { normalizeArabicText } from "@/lib/arabic-text"
+import { cn } from "@/lib/utils"
 
 import type { TripsPageContent } from "../types/trips-content.types"
 import { TripCard } from "./trip-card"
@@ -20,25 +21,29 @@ interface TripsSectionProps {
 export function TripsSection({ content }: TripsSectionProps) {
   const searchInputId = useId()
   const [query, setQuery] = useState("")
+  const [category, setCategory] = useState<
+    TripsPageContent["filters"][number]["id"]
+  >("all")
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const matchingTrips = useMemo(() => {
     const term = normalizeArabicText(query)
 
-    if (!term) {
-      return content.trips
-    }
+    return content.trips.filter((trip) => {
+      const matchesCategory = category === "all" || trip.category === category
+      const matchesQuery =
+        !term ||
+        normalizeArabicText(`${trip.title} ${trip.destination}`).includes(term)
 
-    return content.trips.filter((trip) =>
-      normalizeArabicText(`${trip.title} ${trip.destination}`).includes(term)
-    )
-  }, [content.trips, query])
+      return matchesCategory && matchesQuery
+    })
+  }, [category, content.trips, query])
 
   const visibleTrips = matchingTrips.slice(0, visibleCount)
 
   return (
     <section className="pt-12 pb-16 sm:pt-16">
-      <div className="flex flex-col gap-6 lg:flex-row-reverse lg:items-center lg:justify-between lg:gap-10">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <div className="lg:text-start">
           <h1 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl">
             {content.title}
@@ -69,6 +74,36 @@ export function TripsSection({ content }: TripsSectionProps) {
             className="h-14 rounded-lg border-neutral-200 bg-neutral-100 ps-12 text-base placeholder:text-neutral-400"
           />
         </div>
+      </div>
+
+      <div
+        className="mt-6 flex flex-wrap gap-3"
+        role="group"
+        aria-label={content.filtersLabel}
+      >
+        {content.filters.map((filter) => {
+          const selected = category === filter.id
+
+          return (
+            <button
+              key={filter.id}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => {
+                setCategory(filter.id)
+                setVisibleCount(PAGE_SIZE)
+              }}
+              className={cn(
+                "h-11 rounded-full border px-5 text-sm font-semibold transition-colors",
+                selected
+                  ? "border-brand bg-brand text-white"
+                  : "border-neutral-200 bg-white text-neutral-700 hover:border-brand/40 hover:text-brand"
+              )}
+            >
+              {filter.label}
+            </button>
+          )
+        })}
       </div>
 
       {visibleTrips.length > 0 ? (

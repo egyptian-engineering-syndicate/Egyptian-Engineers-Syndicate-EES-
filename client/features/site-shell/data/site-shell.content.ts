@@ -40,7 +40,7 @@ export const siteShellContent: SiteShellContent = {
       { label: "تواصل معنا", href: "/contact" },
     ],
     contactTitle: "تواصل معنا",
-    address: "شارع رمسيس، القاهرة، جمهورية مصر العربية",
+    address:  "20 شارع عماد الدين -وسط البلد",
     email: "info@eng-syndicate.eg",
     phone: "+20 2 1234 5678",
     newsletterTitle: "النشرة البريدية",

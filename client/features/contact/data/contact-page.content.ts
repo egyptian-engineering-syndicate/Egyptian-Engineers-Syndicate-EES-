@@ -29,7 +29,7 @@ export const contactPageContent: ContactPageContent = {
   infoItems: [
     {
       label: "العنوان",
-      value: "شارع رمسيس، القاهرة، جمهورية مصر العربية",
+      value: "20 شارع عماد الدين -وسط البلد",
       type: "address",
     },
     {

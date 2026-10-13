@@ -1,27 +1,13 @@
-import type { TripDetailsPageContent } from "../types/trip-details-content.types"
+import { notFound } from "next/navigation"
 
-const tripDetailsPageContent: TripDetailsPageContent = {
-  breadcrumbs: [
-    { label: "الرئيسية", href: "/" },
-    { label: "الرحلات", href: "/trips" },
-    { label: "تفاصيل الرحلة" },
-  ],
-  summary: {
-    title: "رحلة إسطنبول الساحرة",
-    description:
-      "رحلة الحج الميسرة مصممة لتمنح الحاج تجربة روحانية فريدة بأقصى درجات الراحة. تشمل الإقامة في فنادق 5 نجوم على بُعد خطوات من الحرم المكي الشريف والمسجد النبوي، مع مرشد ديني متخصص يرافق الحجاج طوال فترة الرحلة.",
-    features: ["التنقلات", "فندق 3 نجوم", "تذاكر الطيران"],
-    price: 1800,
-    priceUnitLabel: "جنيه / فرد",
-    durationLabel: "8 أيام",
-    seatsLabel: "35 مقعد متاح",
-    departureDate: "10 سبتمبر 2025",
-    destination: "إسطنبول، تركيا",
-    image: {
-      src: "/images/trips/istanbul.jpg",
-      alt: "إطلالة على برج غلطة ومضيق البوسفور في إسطنبول",
-    },
-  },
+import type { Trip } from "../types/trips-content.types"
+import type {
+  TripDetailsPageContent,
+  TripDetailsSummary,
+} from "../types/trip-details-content.types"
+import { tripsPageContent } from "./trips-page.content"
+
+const sharedTripDetails = {
   cancellationPolicy: {
     title: "سياسة الإلغاء",
     description:
@@ -57,13 +43,12 @@ const tripDetailsPageContent: TripDetailsPageContent = {
     title: "الدفع",
     subtitle: "احجز رحلتك الان",
     totalLabel: "السعر الاجمالي",
-    totalPrice: 24000,
     currency: "جنيه",
     methodsLabel: "اختر طريقة الدفع",
     paymentMethods: [
-      { id: "card", label: "الدفع بالبطاقة" },
-      { id: "fawry", label: "الدفع بفوري" },
-      { id: "paytabs", label: "الدفع بباي تاب" },
+      { id: "card" as const, label: "الدفع بالبطاقة" },
+      { id: "fawry" as const, label: "الدفع بفوري" },
+      { id: "paytabs" as const, label: "الدفع بباي تاب" },
     ],
     form: {
       cardNameLabel: "اسم البطاقة",
@@ -95,14 +80,73 @@ const tripDetailsPageContent: TripDetailsPageContent = {
   },
 }
 
+function describeTrip(trip: Trip) {
+  const perks = trip.features.join("، ")
+
+  return `${trip.title} لأعضاء نقابة المهندسين. تشمل الرحلة ${perks}، وتتجه إلى ${trip.destination} لمدة ${trip.durationLabel}.`
+}
+
+function summaryForTrip(trip: Trip): TripDetailsSummary {
+  return {
+    title: trip.title,
+    description: describeTrip(trip),
+    features: trip.features,
+    price: trip.price,
+    priceUnitLabel: tripsPageContent.priceUnitLabel,
+    durationLabel: trip.durationLabel,
+    seatsLabel: trip.seatsLabel,
+    departureDate: trip.departureDate,
+    destination: trip.destination,
+    image: trip.image,
+  }
+}
+
+function summaryForHajjLottery(): TripDetailsSummary {
+  const { promo } = tripsPageContent
+
+  return {
+    title: promo.title,
+    description: promo.description,
+    features: ["التأشيرة", "الإقامة", "التنقلات", "الإشراف الطبي"],
+    price: null,
+    priceUnitLabel: tripsPageContent.priceUnitLabel,
+    durationLabel: "حسب البرنامج",
+    seatsLabel: "حسب القرعة",
+    departureDate: "حسب إعلان النتيجة",
+    destination: "مكة المكرمة",
+    image: promo.image,
+  }
+}
+
 /**
- * Temporary adapter: every trip resolves to the same hardcoded details until the
- * Directus queries land. Keep the `tripId` argument so callers already pass it.
+ * Temporary adapter until Directus queries land. Each listing trip, and the Hajj
+ * lottery promo, resolves to its own title and details.
  */
 export function getTripDetailsPageContent(
   tripId: string
 ): TripDetailsPageContent {
-  void tripId
+  const trip = tripsPageContent.trips.find((item) => item.id === tripId)
+  const summary = trip
+    ? summaryForTrip(trip)
+    : tripId === "hajj-lottery"
+      ? summaryForHajjLottery()
+      : null
 
-  return tripDetailsPageContent
+  if (!summary) {
+    notFound()
+  }
+
+  return {
+    ...sharedTripDetails,
+    breadcrumbs: [
+      { label: "الرئيسية", href: "/" },
+      { label: "الرحلات", href: "/trips" },
+      { label: summary.title },
+    ],
+    summary,
+    payment: {
+      ...sharedTripDetails.payment,
+      totalPrice: summary.price,
+    },
+  }
 }

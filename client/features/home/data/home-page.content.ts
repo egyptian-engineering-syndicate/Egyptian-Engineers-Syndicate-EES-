@@ -147,7 +147,7 @@ export const homePageContent: HomePageContent = {
     description:
       "هل لديك فكرة تحدث فرقًا؟ أو تبحث عن استشارة أو طلب خاص؟ أينما كنت، تواصل معنا واحصل على خدمات مميزة.",
     addressLabel: "العنوان",
-    address: "شارع رمسيس، القاهرة، جمهورية مصر العربية",
+    address:  "20 شارع عماد الدين -وسط البلد",
     phoneLabel: "رقم الهاتف",
     phone: "+20 2 1234 5678",
     emailLabel: "البريد الإلكتروني",

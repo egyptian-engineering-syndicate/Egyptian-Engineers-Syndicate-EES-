@@ -33,8 +33,13 @@ export function TripCard({ trip, bookLabel, priceUnitLabel }: TripCardProps) {
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col px-5 py-5 sm:px-6">
-        <h3 className="truncate text-lg font-extrabold text-neutral-950 sm:text-xl">
-          {trip.title}
+        <h3 className="text-lg font-extrabold text-neutral-950 sm:text-xl">
+          <Link
+            href={trip.bookingHref}
+            className="block truncate hover:text-brand"
+          >
+            {trip.title}
+          </Link>
         </h3>
 
         <ul className="mt-3 flex flex-wrap gap-2">

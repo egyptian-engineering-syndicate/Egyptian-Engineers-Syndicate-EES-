@@ -47,12 +47,14 @@ export function TripSummaryCard({ summary }: TripSummaryCardProps) {
           </ul>
         </div>
 
-        <p className="text-2xl font-extrabold text-brand sm:text-3xl">
-          {summary.price}
-          <span className="ms-2 text-sm font-medium text-neutral-500">
-            {summary.priceUnitLabel}
-          </span>
-        </p>
+        {summary.price != null ? (
+          <p className="text-2xl font-extrabold text-brand sm:text-3xl">
+            {summary.price}
+            <span className="ms-2 text-sm font-medium text-neutral-500">
+              {summary.priceUnitLabel}
+            </span>
+          </p>
+        ) : null}
       </div>
 
       <p className="mt-4 text-sm leading-7 text-neutral-500 sm:text-base sm:leading-8">

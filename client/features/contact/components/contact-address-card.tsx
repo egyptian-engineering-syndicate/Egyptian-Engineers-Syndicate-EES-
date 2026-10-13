@@ -15,7 +15,7 @@ export function ContactAddressCard({
 }: ContactAddressCardProps) {
   const rows = [
     { icon: MapPin, text: address.address, dir: "rtl" as const },
-    { icon: Phone, text: address.phones, dir: "ltr" as const },
+    { icon: Phone, text: address.phones, dir: "rtl" as const },
   ]
 
   return (

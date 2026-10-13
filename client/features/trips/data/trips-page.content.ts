@@ -19,13 +19,21 @@ export const tripsPageContent: TripsPageContent = {
   description: "رحلات مميزة لأعضاء نقابة المهندسين بأسعار تفضيلية حصرية",
   searchLabel: "البحث عن رحلة",
   searchPlaceholder: "ابحث عن رحلة",
-  noResultsMessage: "لا توجد رحلات مطابقة لبحثك.",
+  filtersLabel: "تصفية الرحلات",
+  filters: [
+    { id: "all", label: "الكل" },
+    { id: "umrah", label: "عمرة" },
+    { id: "domestic", label: "رحلات داخلية" },
+    { id: "international", label: "رحلات خارجية" },
+  ],
+  noResultsMessage: "لا توجد رحلات مطابقة.",
   loadMoreLabel: "شاهد المزيد",
   bookLabel: "احجز الان",
   priceUnitLabel: "جنيه / فرد",
   trips: [
     {
       id: "umrah-family-economy",
+      category: "umrah",
       title: "عمرة الأسرة الاقتصادية",
       features: standardPerks,
       destination: "مكة المكرمة",
@@ -41,6 +49,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "istanbul-charm",
+      category: "international",
       title: "رحلة إسطنبول الساحرة",
       features: standardPerks,
       destination: "إسطنبول، تركيا",
@@ -56,6 +65,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "umrah-ramadan",
+      category: "umrah",
       title: "عمرة رمضان المباركة",
       features: ["تذاكر الطيران", "فندق 4 نجوم", "وجبات كاملة"],
       destination: "مكة المكرمة",
@@ -71,6 +81,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "hurghada-family",
+      category: "domestic",
       title: "رحلة الغردقة العائلية",
       features: ["الإقامة", "الإفطار", "التنقلات"],
       destination: "الغردقة، مصر",
@@ -86,6 +97,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "dubai-tour",
+      category: "international",
       title: "جولة دبي السياحية",
       features: ["تذاكر الطيران", "فندق 4 نجوم", "جولات سياحية"],
       destination: "دبي، الإمارات",
@@ -101,6 +113,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "luxor-heritage",
+      category: "domestic",
       title: "رحلة الأقصر التاريخية",
       features: ["الإقامة", "مرشد سياحي", "التنقلات"],
       destination: "الأقصر، مصر",
@@ -116,6 +129,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "tbilisi-green",
+      category: "international",
       title: "رحلة تبليسي الخضراء",
       features: ["تذاكر الطيران", "فندق 4 نجوم", "التنقلات"],
       destination: "تبليسي، جورجيا",
@@ -131,6 +145,7 @@ export const tripsPageContent: TripsPageContent = {
     },
     {
       id: "istanbul-cappadocia",
+      category: "international",
       title: "رحلة إسطنبول وكابادوكيا",
       features: ["تذاكر الطيران", "رحلات داخلية", "التنقلات"],
       destination: "إسطنبول، تركيا",

@@ -52,9 +52,9 @@ export function PracticeDetailsPageView({
           title={content.fees.title}
           className="flex min-h-[220px] flex-col items-center justify-center text-center"
         >
-          <div className="grid size-16 place-items-center rounded-full bg-[#edf8f4] text-brand">
-            <Info aria-hidden="true" className="size-8" strokeWidth={1.6} />
-          </div>
+         <div className="mx-auto grid size-16 place-items-center rounded-full bg-[#edf8f4] text-brand">
+  <Info aria-hidden="true" className="size-8" strokeWidth={1.6} />
+</div>
           <p className="mt-4 max-w-sm">{content.fees.description}</p>
         </PracticeInfoCard>
       </div>

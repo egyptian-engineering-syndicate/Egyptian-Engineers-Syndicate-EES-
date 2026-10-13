@@ -62,7 +62,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
             <a
               href={`tel:${footer.phone.replace(/\s/g, "")}`}
               className="flex items-center gap-2.5 transition-colors hover:text-brand"
-              dir="ltr"
+              dir="rtl"
             >
               <Phone className="size-4 text-brand" />
               {footer.phone}

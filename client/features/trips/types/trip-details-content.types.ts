@@ -8,7 +8,8 @@ export interface TripDetailsSummary {
   description: string
   /** Short perks shown as pills, e.g. transfers, hotel rating, flight tickets. */
   features: string[]
-  price: number
+  /** Null when the trip is an application with no listed fare, such as the Hajj lottery. */
+  price: number | null
   priceUnitLabel: string
   durationLabel: string
   seatsLabel: string
@@ -70,7 +71,8 @@ export interface TripPaymentContent {
   title: string
   subtitle: string
   totalLabel: string
-  totalPrice: number
+  /** Null when the trip is an application with no listed fare, such as the Hajj lottery. */
+  totalPrice: number | null
   currency: string
   methodsLabel: string
   paymentMethods: PaymentMethod[]
