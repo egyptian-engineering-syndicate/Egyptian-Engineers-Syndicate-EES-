@@ -69,16 +69,16 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
       </div>
 
       <div className="relative">
-        <div className="mx-auto flex h-[112px] w-full max-w-[1640px] items-center justify-between gap-6 px-5 sm:px-8 lg:px-14">
-          <Link href="/" aria-label={content.brand.name}>
-            <SiteLogo name={content.brand.name} />
+        <div className="mx-auto flex h-[112px] w-full max-w-[1640px] items-center gap-3 px-4 sm:px-6 lg:px-8">
+          <Link href="/" aria-label={content.brand.name} className="shrink-0">
+            <SiteLogo name={content.brand.name} dense />
           </Link>
 
           <nav
-            className="hidden flex-1 2xl:block"
+            className="hidden min-w-0 flex-1 2xl:block"
             aria-label="التنقل الرئيسي"
           >
-            <ul className="flex items-center justify-center gap-2 2xl:gap-4">
+            <ul className="flex items-center justify-center gap-0.5">
               {content.navigation.map((item) => {
                 const path = item.href.split("#")[0] || "/"
                 const isActive =
@@ -87,12 +87,12 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
                     : pathname.startsWith(path)
 
                 return (
-                  <li key={item.href}>
+                  <li key={item.href} className="min-w-0">
                     <Link
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => scrollToPageHash(item.href)}
-                      className={`flex h-14 items-center gap-1.5 rounded-md px-3 text-sm font-medium whitespace-nowrap transition-colors xl:px-4 xl:text-base ${
+                      className={`flex h-11 items-center gap-1 rounded-md px-2 text-[13px] font-medium whitespace-nowrap transition-colors ${
                         isActive
                           ? "bg-[#eaf5f1] font-bold text-brand"
                           : "text-neutral-700 hover:bg-brand/5 hover:text-brand"
@@ -113,12 +113,12 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
             <Link
               href={activeUser.profileHref}
               aria-label="الملف الشخصي"
-              className="hidden min-w-44 items-center gap-3 rounded-md transition-colors hover:bg-brand/5 2xl:flex"
+              className="hidden shrink-0 items-center gap-2 rounded-md transition-colors hover:bg-brand/5 2xl:flex"
             >
-              <div className="grid size-14 place-items-center rounded-md bg-[#edf8f4] text-brand">
+              <div className="grid size-11 place-items-center rounded-md bg-[#edf8f4] text-brand">
                 <UserRound
                   aria-hidden="true"
-                  className="size-7"
+                  className="size-6"
                   strokeWidth={1.8}
                 />
               </div>
@@ -132,7 +132,7 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
           ) : (
             <Button
               asChild
-              className="hidden h-14 min-w-44 rounded-md bg-brand px-7 text-base font-semibold text-white hover:bg-brand-strong 2xl:inline-flex"
+              className="hidden h-11 shrink-0 rounded-md bg-brand px-4 text-sm font-semibold text-white hover:bg-brand-strong 2xl:inline-flex"
             >
               <Link href={content.login.href}>{content.login.label}</Link>
             </Button>

@@ -4,12 +4,14 @@ interface SiteLogoProps {
   name: string
   compact?: boolean
   inverse?: boolean
+  dense?: boolean
 }
 
 export function SiteLogo({
   name,
   compact = false,
   inverse = false,
+  dense = false,
 }: SiteLogoProps) {
   return (
     <div className="flex shrink-0 items-center gap-3">
@@ -27,7 +29,9 @@ export function SiteLogo({
           className={
             inverse
               ? "text-lg font-bold text-brand"
-              : "hidden text-lg font-extrabold text-brand sm:inline lg:text-xl"
+              : dense
+                ? "hidden text-base font-extrabold text-brand sm:inline"
+                : "hidden text-lg font-extrabold text-brand sm:inline lg:text-xl"
           }
         >
           {name}
