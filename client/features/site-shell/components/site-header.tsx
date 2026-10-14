@@ -92,7 +92,7 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => scrollToPageHash(item.href)}
-                      className={`flex h-11 items-center gap-1 rounded-md px-2 text-[13px] font-medium whitespace-nowrap transition-colors ${
+                      className={`flex h-11 items-center gap-3 rounded-md px-2 text-lg font-medium whitespace-nowrap transition-colors ${
                         isActive
                           ? "bg-[#eaf5f1] font-bold text-brand"
                           : "text-neutral-700 hover:bg-brand/5 hover:text-brand"
@@ -132,7 +132,7 @@ export function SiteHeader({ content, user }: SiteHeaderProps) {
           ) : (
             <Button
               asChild
-              className="hidden h-11 shrink-0 rounded-md bg-brand px-4 text-sm font-semibold text-white hover:bg-brand-strong 2xl:inline-flex"
+              className="hidden h-11 shrink-0 rounded-md bg-brand px-4 text-base font-semibold text-white hover:bg-brand-strong 2xl:inline-flex"
             >
               <Link href={content.login.href}>{content.login.label}</Link>
             </Button>
